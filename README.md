@@ -5,7 +5,7 @@ A C++ library for streaming algorithms
 
 ## Description
 Algorithms included:
-	+ Count-Min Sketch
+	* Count-Min Sketch
 	  ref:
-	+ FM Sketch
+	* FM Sketch
 	  ref:
