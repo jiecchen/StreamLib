@@ -38,9 +38,13 @@ class TestUniversalHash(unittest.TestCase):
             hs = self.uhash.pickHash()
             if hs.hash(x) == hs.hash(y):
                 ct += 1
-        print ct
-        self.assertTrue((ct + 0.) / self.uhash._M <= 4. / self.uhash._M)
-            
+            self.assertTrue(hs.hash(x) < hs._M)
+            self.assertTrue(hs.hash(y) < hs._M)
+        self.assertTrue((ct + 0.) / self.uhash._M <= 3. / self.uhash._M)
+        
+        
+        
+
 
 if __name__ == '__main__':
     unittest.main()

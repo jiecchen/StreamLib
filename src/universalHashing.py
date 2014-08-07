@@ -11,7 +11,14 @@ from bisect import bisect_left
 import math 
 import random
 
-Primes = (2, 11, 1289, 1999, 2551, 3023, 3469, 3851, 4217, 4561, 4909, 5197, 5501, 
+Primes = (3, 7, 13, 19, 29, 37, 43, 53, 61, 71, 79, 89, 101, 107, 113, 131, 
+          139, 151, 163, 173, 181, 193, 199, 223, 229, 239, 251, 263, 271, 281, 
+          293, 311, 317, 337, 349, 359, 373, 383, 397, 409, 421, 433, 443, 457, 
+          463, 479, 491, 503, 521, 541, 557, 569, 577, 593, 601, 613, 619, 641, 
+          647, 659, 673, 683, 701, 719, 733, 743, 757, 769, 787, 809, 821, 827, 839, 
+          857, 863, 881, 887, 911, 929, 941, 953, 971, 983, 997, 1013, 1021, 1033,
+          1049, 1061, 1069, 1091, 1097, 1109, 1123, 1151, 1163, 1181, 1193, 1213, 1223,
+          1289, 1999, 2551, 3023, 3469, 3851, 4217, 4561, 4909, 5197, 5501, 
           5779, 6053, 6301, 6569, 6823, 7027, 7297, 7541, 7727, 7951, 8209, 
           8419, 8629, 8807, 9007, 9203, 9397, 9547, 9743, 9907, 10111, 10273, 
           10459, 10651, 10847, 11003, 11173, 11353, 11519, 11717, 11887, 12011, 
@@ -22,8 +29,8 @@ Primes = (2, 11, 1289, 1999, 2551, 3023, 3469, 3851, 4217, 4561, 4909, 5197, 550
           17509, 17627, 17761, 17891, 17981, 18097, 18199, 18301, 18413, 18517, 
           18661, 18787, 18919, 19069, 19183, 19289, 19417)
 
-
-
+# TODO: fix the bug that the returned hash value might be larger than M
+#       This bug is due to the gap between M and its nearest neighbor
 class _LinearHash:
     """
     hash function use linear combination % M,
@@ -32,7 +39,7 @@ class _LinearHash:
     def __init__(self, _M, _rd):
         # make sure self._M is a prime number right rather than _M
         pos = bisect_left(Primes, _M)
-        self._M = Primes[pos]
+        self._M = _M #Primes[pos]
         # make sure self._base < self._M
         b = int(math.log(self._M, 2)) - 1
         self._base = (1 << b) - 1
@@ -57,7 +64,7 @@ class _LinearHash:
             x_int = (x_int >> self._b)
             hash_value = (hash_value + self._para[i] * current) % self._M
             i += 1
-        return hash_value
+        return hash_value 
             
         
 
