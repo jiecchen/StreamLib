@@ -21,12 +21,13 @@ class TestMisra_Gries(unittest.TestCase):
             f = self.seq[x]
             self.assertTrue(f - _sum / self.mg._k <= ef <= f)
 
+
 class TestUniversalHash(unittest.TestCase):
     def setUp(self):
         self.uhash = UniversalHash(100)
         
         
-    def test_calc(self):
+    def test_hash(self):
         random.seed()
         x = random.choice(['xxxx1', 'sd2', 'zz3', 'www4', 'ddd5'])
         y = x + "dsfaeare"

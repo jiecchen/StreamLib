@@ -1,3 +1,16 @@
+# Implementation for Universal Hash Gamily.
+# Analysis of the algorithm can be found in (sec 10.6.1)
+# http://www.cs.cmu.edu/~avrim/451f11/lectures/lect1004.pdf
+# or
+# https://github.com/jiecchen/references/blob/master/lect1004.pdf
+
+
+
+
+from bisect import bisect_left
+import math 
+import random
+
 Primes = (2, 11, 1289, 1999, 2551, 3023, 3469, 3851, 4217, 4561, 4909, 5197, 5501, 
           5779, 6053, 6301, 6569, 6823, 7027, 7297, 7541, 7727, 7951, 8209, 
           8419, 8629, 8807, 9007, 9203, 9397, 9547, 9743, 9907, 10111, 10273, 
@@ -50,9 +63,7 @@ class _LinearHash:
 
 
 
-from bisect import bisect_left
-import math 
-import random
+
 class UniversalHash:
     """
     Example:
