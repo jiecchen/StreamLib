@@ -9,6 +9,8 @@ Primes = (2, 11, 1289, 1999, 2551, 3023, 3469, 3851, 4217, 4561, 4909, 5197, 550
           17509, 17627, 17761, 17891, 17981, 18097, 18199, 18301, 18413, 18517, 
           18661, 18787, 18919, 19069, 19183, 19289, 19417)
 
+
+
 class _LinearHash:
     """
     hash function use linear combination % M,
@@ -22,11 +24,11 @@ class _LinearHash:
         b = int(math.log(self._M, 2)) - 1
         self._base = (1 << b) - 1
         self._b = b
-        self._para = [_rd.choice(range(self._M)) for i in range(32 / self._b + 1)]
-        print (self._M, self._base, self._b, self._para)
+        self._para = [_rd.choice(range(self._M)) for i in range(100 / self._b + 1)]
+        # print (self._M, self._base, self._b, self._para)
     
     
-    def _calc(self, key):
+    def hash(self, key):
         try:
             x_int = key.__hash__()
         except AttributeError:
@@ -60,7 +62,7 @@ class UniversalHash:
     uhash = UniversalHash(M)
     hs = uhash.pickHash()
     ----------------
-    hs(hashable_obj) will give the hash value of hashable_obj which is \in [M]
+    hs.hash(hashable_obj) will give the hash value of hashable_obj which is \in [M]
     """
     def __init__(self, _M):
         self._random = random.Random()
@@ -69,5 +71,9 @@ class UniversalHash:
 
     def pickHash(self):
         return _LinearHash(self._M, self._random)
+
+            
+            
+
     
         

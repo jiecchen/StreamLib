@@ -3,7 +3,7 @@ from src.Misra_Gries import MG
 from src.universalHashing import UniversalHash
 
 import unittest
-
+import random
 class TestMisra_Gries(unittest.TestCase):
     def setUp(self):
         self.mg = MG(4)
@@ -23,12 +23,22 @@ class TestMisra_Gries(unittest.TestCase):
 
 class TestUniversalHash(unittest.TestCase):
     def setUp(self):
-        uhash = UniversalHash(1000)
-        self.hs = uhash.pickHash()
+        self.uhash = UniversalHash(100)
+        
         
     def test_calc(self):
-        for x in range(10):
-            self.assertTrue(self.hs._calc(x + 100) == self.hs._calc(x + 100))
+        random.seed()
+        x = random.choice(['xxxx1', 'sd2', 'zz3', 'www4', 'ddd5'])
+        y = x + "dsfaeare"
+        # hs = self.uhash.pickHash()
+        # self.assertTrue(hs.hash(x) == hs.hash(x))
+        ct = 0
+        for i in range(3 * self.uhash._M):
+            hs = self.uhash.pickHash()
+            if hs.hash(x) == hs.hash(y):
+                ct += 1
+        print ct
+        self.assertTrue((ct + 0.) / self.uhash._M <= 4. / self.uhash._M)
             
 
 if __name__ == '__main__':
