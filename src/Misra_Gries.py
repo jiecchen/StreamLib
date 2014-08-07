@@ -15,7 +15,7 @@ class MG:
     More detail can be found in 
     http://www.cs.dartmouth.edu/~ac/Teach/CS49-Fall11/Notes/lecnotes.pdf
     or
-    https://github.com/jiecchen/references/blob/master/lect1004.pdf
+    https://github.com/jiecchen/references/blob/master/lecnotes.pdf
     """
     def __init__(self, _k):
         self.A = {}

@@ -30,7 +30,7 @@ Primes = (3, 7, 13, 19, 29, 37, 43, 53, 61, 71, 79, 89, 101, 107, 113, 131,
           18661, 18787, 18919, 19069, 19183, 19289, 19417)
 
 # TODO: fix the bug that the returned hash value might be larger than M
-#       This bug is due to the gap between M and its nearest neighbor
+#       This bug is due to the gap between M and its nearest prime number
 class _LinearHash:
     """
     hash function use linear combination % M,
