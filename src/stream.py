@@ -1,8 +1,6 @@
 from collections import Iterable
 _Default_Distribution = [0, 1]
 
-# A discrete Distribution is a finite built-in dict
-# e.g. {'A' : 0.1, 'B': 0.5, 'C': 0.4}
 
 from bisect import bisect_left
 import random
@@ -49,7 +47,13 @@ class Distribution:
 
 class DataStream:
     """
-    The class for data stream.
+    The class for data stream, defined as an iterator
+
+    Example 1:
+    >>> d = DataStream([1, 2, 3, 4], 10)
+    >>> for s in d:
+    ...    print s
+    
     """
     def __init__(self, _distribution=None, _size = 100):
         self._size = _size
