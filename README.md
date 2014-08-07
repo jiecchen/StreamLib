@@ -1,13 +1,9 @@
 StreamLib
 =========
 
-A C++ library for streaming algorithms
+A Python library for streaming algorithms
 
 ## Description
 Algorithms included:
-
-	* Count-Min Sketch
-	  ref:
-
-	* FM Sketch
-	  ref:
+ 1. ..
+ 2. ..
