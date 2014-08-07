@@ -1,9 +1,11 @@
-from collections import Iterable
 _Default_Distribution = [0, 1]
 
 
 from bisect import bisect_left
 import random
+
+# TODO: + extend to continuous distribution
+#       + add more flexible constructors
 class Distribution:
     """
     The class to represent a distribution
