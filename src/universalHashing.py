@@ -49,6 +49,10 @@ class _LinearHash:
     
     
     def hash(self, key):
+        """
+        Given a key (should be hashable type),
+        return the hashed value
+        """
         try:
             x_int = key.__hash__()
         except AttributeError:
@@ -88,6 +92,11 @@ class UniversalHash:
         self._M = _M
 
     def pickHash(self):
+        """ 
+        Randomly return a hash function belongs to 
+        this Universal Hash Family. Such hash function is
+        an instance of _LinearHash hence has the method .hash(hashable_object)
+        """
         return _LinearHash(self._M, self._random)
 
             
