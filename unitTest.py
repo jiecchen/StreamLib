@@ -34,17 +34,35 @@ class TestUniversalHash(unittest.TestCase):
         # hs = self.uhash.pickHash()
         # self.assertTrue(hs.hash(x) == hs.hash(x))
         ct = 0
-        for i in range(3 * self.uhash._M):
+        for i in range(10 * self.uhash._M):
             hs = self.uhash.pickHash()
             if hs.hash(x) == hs.hash(y):
                 ct += 1
             self.assertTrue(hs.hash(x) < hs._M)
             self.assertTrue(hs.hash(y) < hs._M)
-        self.assertTrue((ct + 0.) / self.uhash._M <= 3. / self.uhash._M)
+        self.assertTrue((ct + 0.) / self.uhash._M <= 20. / self.uhash._M)
         
-        
-        
+from src.utils import zeros
+class Test_Utils(unittest.TestCase):
+    def setUp(self):
+        pass
+    def test_zeros(self):
+        for i in range(20):
+            self.assertTrue(zeros(1 << i) == i)
+        self.assertTrue(zeros(0) == 0)
 
+from src.BJKST import BJKST
+class Test_BJKST(unittest.TestCase):
+    def setUp(self):
+        pass
+        
+    def test_getEstimation(self):
+        d = DataStream(list("qwertyuiopasdfghjklzxcvbnm"), 1000)
+        sketch = BJKST(26, 0.1, 0.001)
+        for x in d:
+            sketch.process(x)
+        print sketch.getEstimation()
+        
 
 if __name__ == '__main__':
     unittest.main()

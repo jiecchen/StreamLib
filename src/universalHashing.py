@@ -38,6 +38,7 @@ class _LinearHash:
     """
     def __init__(self, _M, _rd):
         # make sure self._M is a prime number right rather than _M
+        _M = 19289 if _M > 19289 else _M
         pos = bisect_left(Primes, _M)
         self._M = _M #Primes[pos]
         # make sure self._base < self._M
