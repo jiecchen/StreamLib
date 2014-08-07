@@ -19,3 +19,9 @@
 *.exe
 *.out
 *.app
+
+# Python
+*.pyc
+
+# Emacs Backup file
+*.*~

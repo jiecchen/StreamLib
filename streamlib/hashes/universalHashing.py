@@ -84,15 +84,37 @@ class _hash:
         pass
     
     def hash(self, key):
+        """
+        @args
+        key : a hashable object
+        @return 
+        an integer as hashed value, \in [0, M)
+        """
         pass
 
-from 
-class matrixHash(_hash):
+
+from streamlib.info import MachineBits 
+from streamlib.utils import CountBits
+class _matrixHash(_hash):
     """ Hash class constructed by matrix method """
     def __init__(self, _M, _random):
         self.b = int(math.log(_M, 2)) + 1
-        self.matrix = [_random]
+        self.matrix = [int(_random.getrandbits(MachineBits)) for i in range(self.b)]
 
+    def hash(self, key):
+        try:
+            x_int = key.__hash__()
+        except AttributeError:
+            x_int = hash(key)
+
+        if x_int < 0:
+            x_int = -(x_int + 1)
+
+        value = 0
+        for v in self.matrix:
+            tmp = CountBits(v & x_int) & 1
+            value = (value << 1) | tmp
+        return value
 
 
 class UniversalHash:
@@ -117,7 +139,7 @@ class UniversalHash:
         this Universal Hash Family. Such hash function is
         an instance of _LinearHash hence has the method .hash(hashable_object)
         """
-        return _LinearHash(self._M, self._random)
+        return _matrixHash(self._M, self._random)
 
             
             

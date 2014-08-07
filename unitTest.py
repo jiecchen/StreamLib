@@ -1,6 +1,6 @@
-from src.stream import DataStream
-from src.Misra_Gries import MG
-from src.universalHashing import UniversalHash
+from streamlib.stream import DataStream
+from streamlib.Misra_Gries import MG
+from streamlib.hashes.universalHashing import UniversalHash
 
 import unittest
 import random
@@ -9,6 +9,7 @@ class TestMisra_Gries(unittest.TestCase):
         self.mg = MG(4)
         self.seq = {}
         self.d = DataStream({'A': 1, 'B': 5, 'C': 100, 'D': 100}, 500)
+
 
     def test_frequency(self):
         for x in self.d:
@@ -24,7 +25,7 @@ class TestMisra_Gries(unittest.TestCase):
 
 class TestUniversalHash(unittest.TestCase):
     def setUp(self):
-        self.uhash = UniversalHash(100)
+        self.uhash = UniversalHash(300)
         
         
     def test_hash(self):
@@ -38,11 +39,11 @@ class TestUniversalHash(unittest.TestCase):
             hs = self.uhash.pickHash()
             if hs.hash(x) == hs.hash(y):
                 ct += 1
-            self.assertTrue(hs.hash(x) < hs._M)
-            self.assertTrue(hs.hash(y) < hs._M)
+            # self.assertTrue(hs.hash(x) < hs._M)
+            # self.assertTrue(hs.hash(y) < hs._M)
         self.assertTrue((ct + 0.) / self.uhash._M <= 20. / self.uhash._M)
         
-from src.utils import zeros
+from streamlib.utils import zeros, CountBits
 class Test_Utils(unittest.TestCase):
     def setUp(self):
         pass
@@ -50,18 +51,21 @@ class Test_Utils(unittest.TestCase):
         for i in range(20):
             self.assertTrue(zeros(1 << i) == i)
         self.assertTrue(zeros(0) == 0)
+    
+    def test_CountBits(self):
+        self.assertEqual(31, CountBits((1 << 31) - 1))
 
-from src.BJKST import BJKST
+from streamlib.BJKST import BJKST
 class Test_BJKST(unittest.TestCase):
     def setUp(self):
         pass
         
     def test_getEstimation(self):
         d = DataStream(list("qwertyuiopasdfghjklzxcvbnm"), 1000)
-        sketch = BJKST(26, 0.1, 0.001)
+        sketch = BJKST(26, 0.2, 0.001)
         for x in d:
             sketch.process(x)
-        print sketch.getEstimation()
+        self.assertTrue( 26 * 0.8 <= sketch.getEstimation() <= 26 * 1.2)
         
 
 if __name__ == '__main__':
