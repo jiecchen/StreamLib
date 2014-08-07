@@ -1,4 +1,4 @@
-from universalHashing import UniversalHash
+from .hashes.universalHashing import UniversalHash
 from utils import zeros, median
 import math
 class _BJKST_Estimator:
