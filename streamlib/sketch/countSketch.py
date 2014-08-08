@@ -1,8 +1,13 @@
+from streamlib.sketch.sketch import Sketch, BasicEstimator
 from streamlib.hashes.universalHashing import UniversalHash
 from streamlib.utils import zeros, median
+from streamlib.wrappers import inherit_docs
 import math
 import random
-class _CountSketch_estimator:
+
+
+@inherit_docs
+class _CountSketch_estimator(BasicEstimator):
     """ Basic estimator for Count Sketch """
     def __init__(self, k, uhash_h, uhash_g):
         """  
@@ -14,9 +19,15 @@ class _CountSketch_estimator:
         self.C = [0 for i in range(self.k)]
         self.h = uhash_h.pickHash()
         self.g = uhash_g.pickHash()
-        
+    
     def process(self, key):
         self.C[self.h.hash(key)] +=  1 - 2 * self.g.hash(key)
+
+
+    def batchProcess(self, dataStream):
+        for itm in dataStream:
+            self.process(itm)
+        
 
     def getEstimation(self, key):
         return (1 - 2 * self.g.hash(key)) * self.C[self.h.hash(key)]
@@ -25,8 +36,8 @@ class _CountSketch_estimator:
         
         
 
-
-class CountSketch:
+@inherit_docs
+class CountSketch(Sketch):
     def __init__(self, eps, delta = 0.01):
         """
         @args
@@ -40,11 +51,18 @@ class CountSketch:
         n_hash = int(math.log(1. / delta, 2)) + 1
         self.estimators = [_CountSketch_estimator(self.k, uhash_h, uhash_g) for i in range(n_hash)]
 
+
     def process(self, key):
         """ process the key """
         for est in self.estimators:
             est.process(key)
-        
+
+
+    def batchProcess(self, dataStream):
+        for itm in dataStream:
+            self.process(itm)
+
+
     def getEstimation(self, key):
         """ return the (eps, delta)-approximation """
         return median( [est.getEstimation(key) for est in self.estimators] )

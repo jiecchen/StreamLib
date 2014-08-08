@@ -46,6 +46,10 @@ class Distribution:
         
 
 
+# TODO: + turnstile model 
+#       + strict turnstile model 
+#       + cash register model
+
 
 class DataStream:
     """

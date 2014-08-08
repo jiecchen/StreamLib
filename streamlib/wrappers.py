@@ -1,23 +1,9 @@
-from functools import wraps
+from inspect import getmembers, isfunction
 
-# class ObjectCalc:
-#     """
-#     Abstract class that can be decorated by @directCalc
-#     """
-#     def _calc(self, *args, **kwargs):
-#         pass
-
-
-# def directCalc(obj):
-#     """
-#     given an instance with method .calc()
-#     return a function that directly call .calc()
-#     """
-#     # @wraps(obj)
-        
-#     if not hasattr(obj, '_calc'):
-#         raise AttributeError
-#     def _wappers(*args, **kwargs):
-#         return obj._calc(*args, **kwargs)
-#     return _wappers
-
+def inherit_docs(cls):
+    for name, func in getmembers(cls, isfunction):
+        if func.__doc__: continue
+        for parent in cls.__mro__[1:]:
+            if hasattr(parent, name):
+                func.__doc__ = getattr(parent, name).__doc__
+    return cls
