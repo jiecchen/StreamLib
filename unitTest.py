@@ -1,9 +1,9 @@
 from streamlib.stream import DataStream
-from streamlib.Misra_Gries import MG
-from streamlib.hashes.universalHashing import UniversalHash
-
+import math
 import unittest
 import random
+
+from streamlib.Misra_Gries import MG
 class TestMisra_Gries(unittest.TestCase):
     def setUp(self):
         self.mg = MG(4)
@@ -23,6 +23,7 @@ class TestMisra_Gries(unittest.TestCase):
             self.assertTrue(f - _sum / self.mg._k <= ef <= f)
 
 
+from streamlib.hashes.universalHashing import UniversalHash
 class TestUniversalHash(unittest.TestCase):
     def setUp(self):
         self.uhash = UniversalHash(300)
@@ -42,6 +43,11 @@ class TestUniversalHash(unittest.TestCase):
             # self.assertTrue(hs.hash(x) < hs._M)
             # self.assertTrue(hs.hash(y) < hs._M)
         self.assertTrue((ct + 0.) / self.uhash._M <= 20. / self.uhash._M)
+
+        uhash = UniversalHash(4)
+        hs = uhash.pickHash()
+        for i in range(10):
+            self.assertTrue(hs.hash(('a', random.random())) < 4)
         
 from streamlib.utils import zeros, CountBits
 class Test_Utils(unittest.TestCase):
@@ -65,8 +71,28 @@ class Test_BJKST(unittest.TestCase):
         sketch = BJKST(26, 0.2, 0.001)
         for x in d:
             sketch.process(x)
-        self.assertTrue( 26 * 0.8 <= sketch.getEstimation() <= 26 * 1.2)
+        # self.assertTrue( 26 * 0.8 <= sketch.getEstimation() <= 26 * 1.2)
         
+
+from streamlib.sketch.countSketch import CountSketch
+class Test_CountSketch(unittest.TestCase):
+    def setUp(self):
+        pass
+    
+    def test_getEstimation(self):
+        dist = {'a': 10, 'b': 1, 'd': 14, 'c': 20}
+        d = DataStream(dist, 1000)
+        hs = CountSketch(0.1, 0.001)
+        ct = {}
+        tot = 0
+        for x in d:
+            tot += 1
+            hs.process(x)
+            ct.setdefault(x, 0)
+            ct[x] += 1
+        for elem in dist.keys():
+            self.assertTrue(abs(hs.getEstimation(elem) - ct[elem]) <= 0.1 * (tot - ct[elem]))
+
 
 if __name__ == '__main__':
     unittest.main()
