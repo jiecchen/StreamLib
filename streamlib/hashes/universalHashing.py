@@ -98,7 +98,7 @@ from streamlib.utils import CountBits
 class _matrixHash(_hash):
     """ Hash class constructed by matrix method """
     def __init__(self, _M, _random):
-        self.b = int(math.log(_M, 2)) + 1
+        self.b = int(math.log(_M, 2)) # + 1 -------> pay attention here
         self.matrix = [int(_random.getrandbits(MachineBits)) for i in range(self.b)]
 
     def hash(self, key):
@@ -117,6 +117,10 @@ class _matrixHash(_hash):
         return value
 
 
+# there is an issue, given M, the return hash value 
+# might never reach M - 1  due to the gap between M and its
+# its nearest 2^m.
+# Any idea to fix?
 class UniversalHash:
     """
     Example:
