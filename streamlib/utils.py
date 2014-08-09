@@ -54,3 +54,13 @@ def CountBits(n):
     n = (n & 0x0000FFFF0000FFFF) + ((n & 0xFFFF0000FFFF0000) >> 16)
     n = (n & 0x00000000FFFFFFFF) + ((n & 0xFFFFFFFF00000000) >> 32) # This last & isn't strictly necessary.
     return int(n)
+
+
+import operator
+import copy
+def unionDict(dict1, dict2, op = operator.add, defaultValue = 0):
+    dt = copy.deepcopy(dict1)
+    for k, v in dict2.items():
+        dt.setdefault(k, defaultValue)
+        dt[k] = op(dt[k], v)
+    return dt
