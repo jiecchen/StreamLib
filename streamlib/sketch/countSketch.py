@@ -32,7 +32,9 @@ class _CountSketch_estimator(BasicEstimator):
     def getEstimation(self, key):
         return (1 - 2 * self.g.hash(key)) * self.C[self.h.hash(key)]
     
-    
+
+    def merge(self, skc):
+        pass
         
         
 
@@ -67,3 +69,6 @@ class CountSketch(Sketch):
         """ return the (eps, delta)-approximation """
         return median( [est.getEstimation(key) for est in self.estimators] )
 
+
+    def merge(self, skc):
+        pass

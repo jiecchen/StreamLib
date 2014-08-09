@@ -1,20 +1,27 @@
-class BasicEstimator:
+from abc import ABCMeta, abstractmethod
+
+class BasicEstimator():
     """ Interface for basic sketch estimator """
+    __metaclass__ = ABCMeta
     def __init__(self, *args, **kwargs):
         pass
 
+    @abstractmethod
     def process(self, *args, **kwargs):
         """ process each item """
         pass
 
+    @abstractmethod
     def batchProcess(self, dataStream):
         """ process the dataStream in batch """
         pass
 
+    @abstractmethod
     def getEstimation(self, *args, **kwargs):
         """ return the estimation """
         pass
 
+    @abstractmethod
     def merge(self, estimator):
         """
         @args
@@ -28,21 +35,27 @@ class BasicEstimator:
 
 class Sketch:
     """ Interface for sketch classes """
+    __metaclass__ = ABCMeta
+    @abstractmethod
     def __init__(self, *args, **kwargs):
         pass
-
+        
+    @abstractmethod
     def process(self, *args, **kwargs):
         """ process each item """
         pass
 
+    @abstractmethod    
     def batchProcess(self, dataStream):
         """ process the dataStream in batch """
         pass
 
+    @abstractmethod
     def getEstimation(self, *args, **kwargs):
         """ return the estimation """
         pass
-
+    
+    @abstractmethod
     def merge(self, sketch):
         """
         @args
