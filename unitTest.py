@@ -49,7 +49,7 @@ class TestUniversalHash(unittest.TestCase):
         for i in range(10):
             self.assertTrue(hs.hash(('a', random.random())) < 4)
         
-from streamlib.utils import zeros, CountBits
+from streamlib.utils import zeros, CountBits, unionDict
 class Test_Utils(unittest.TestCase):
     def setUp(self):
         pass
@@ -61,7 +61,12 @@ class Test_Utils(unittest.TestCase):
     def test_CountBits(self):
         self.assertEqual(31, CountBits((1 << 31) - 1))
 
-from streamlib.BJKST import BJKST
+    def test_unionDict(self):
+        d1 = {'a': 1, 'b': 2}
+        d2 = {'c': 1, 'a': 5}
+        self.assertTrue(unionDict(d1, d2) == {'a':6, 'b':2, 'c':1})
+
+from streamlib.sketch.BJKST import BJKST
 class Test_BJKST(unittest.TestCase):
     def setUp(self):
         pass
