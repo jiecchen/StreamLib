@@ -11,10 +11,11 @@ class BasicEstimator():
         """ process each item """
         pass
 
-    @abstractmethod
+    # @abstractmethod
     def batchProcess(self, dataStream):
         """ process the dataStream in batch """
-        pass
+        for itm in dataStream:
+            self.process(itm)
 
     @abstractmethod
     def getEstimation(self, *args, **kwargs):
@@ -45,10 +46,12 @@ class Sketch:
         """ process each item """
         pass
 
-    @abstractmethod    
+    # @abstractmethod    
     def batchProcess(self, dataStream):
         """ process the dataStream in batch """
-        pass
+        for itm in dataStream:
+            self.process(itm)
+
 
     @abstractmethod
     def getEstimation(self, *args, **kwargs):

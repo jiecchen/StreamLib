@@ -1,8 +1,13 @@
 
-from .hashes.universalHashing import UniversalHash
-from utils import zeros, median
+from streamlib.hashes.universalHashing import UniversalHash
+from streamlib.utils import zeros, median, unionDict
+from sketch import Sketch, BasicEstimator
+from streamlib.wrappers import inherit_docs
 import math
-class _BJKST_Estimator:
+
+
+@inherit_docs
+class _BJKST_Estimator(BasicEstimator):
     """
     Basic BJKST-Estimator to esimate # of distinct elements in a data stream.
     It gives a (eps, O(1))-approximation, and the "Constant Probability" can
@@ -22,6 +27,11 @@ class _BJKST_Estimator:
         self.thresh = thresh
         # print self.thresh
 
+    def _shrinkB(self):
+        while len(self.B) >= self.thresh:
+            self.z += 1
+            self.B = {k:v for k, v in self.B.items() if v >= self.z}
+
 
     def process(self, key):
         """ process the given item """
@@ -29,10 +39,7 @@ class _BJKST_Estimator:
         if hs >= self.z:
             self.B[self.g.hash(key)] = hs
         
-        while len(self.B) >= self.thresh:
-            self.z += 1
-            self.B = {k:v for k, v in self.B.items() if v >= self.z}
-
+        
     def getEstimation(self):
         """
         return a integer as an (eps, O(1))-approximation of #
@@ -40,11 +47,15 @@ class _BJKST_Estimator:
         """
         return len(self.B) * (2**self.z)
 
+    
+    def merge(self, skc):
+        self.B = unionDict(self.B, skc.B)
+        self._shrinkB()
 
 
 
-
-class BJKST:
+@inherit_docs
+class BJKST(Sketch):
     """
     BJKST sketch for estimation the distinct frequency.
     Algorithm and Analysis can be found in:
@@ -54,8 +65,8 @@ class BJKST:
 
     Usage:
     @args
-    n    :  the size of universe
-    eps, delta: control the quality of estimation
+    n           :  the size of universe
+    eps, delta  :  control the quality of estimation
     @return
     BJKST(n, eps, delta) returns  an (eps, delta) - BJKST sketch with para eps and delta.
 
@@ -87,12 +98,18 @@ class BJKST:
         """ process the key """
         for est in self.estimators:
             est.process(key)
+
             
     def getEstimation(self):
         """ return the (eps, delta)-approximation """
         return median( [est.getEstimation() for est in self.estimators] )
 
+    def merge(self, skc):
+        """ To be check """
+        un = zip(self.estimators, skc.estimators)
+        self.estimators = [u.merge(v) for u, v in un]
 
+        
 
 
 

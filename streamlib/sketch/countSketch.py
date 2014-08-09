@@ -22,11 +22,6 @@ class _CountSketch_estimator(BasicEstimator):
     
     def process(self, key):
         self.C[self.h.hash(key)] +=  1 - 2 * self.g.hash(key)
-
-
-    def batchProcess(self, dataStream):
-        for itm in dataStream:
-            self.process(itm)
         
 
     def getEstimation(self, key):
@@ -58,11 +53,6 @@ class CountSketch(Sketch):
         """ process the key """
         for est in self.estimators:
             est.process(key)
-
-
-    def batchProcess(self, dataStream):
-        for itm in dataStream:
-            self.process(itm)
 
 
     def getEstimation(self, key):
