@@ -122,8 +122,8 @@ class DataStream(ABDataSrteam):
     
     """
     def __init__(self, distribution=None, size = 100, model = 'simple'):
-        self._size = _size
-        self._distribution = Distribution(_distribution)
+        self._size = size
+        self._distribution = Distribution(distribution)
 
     def __iter__(self):
         return self

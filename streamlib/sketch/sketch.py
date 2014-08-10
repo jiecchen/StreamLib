@@ -35,9 +35,9 @@ class BasicEstimator():
 class Sketch:
     """ Interface for sketch classes """
     __metaclass__ = ABCMeta
-    @abstractmethod
-    def __init__(self, *args, **kwargs):
-        pass
+    # @abstractmethod
+    # def __init__(self, *args, **kwargs):
+    #     pass
         
     @abstractmethod
     def process(self, *args, **kwargs):

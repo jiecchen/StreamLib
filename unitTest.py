@@ -3,7 +3,7 @@ import math
 import unittest
 import random
 
-from streamlib.Misra_Gries import MG
+from streamlib.sketch.Misra_Gries import MG
 class TestMisra_Gries(unittest.TestCase):
     def setUp(self):
         self.mg = MG(4)

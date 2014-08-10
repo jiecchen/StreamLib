@@ -1,5 +1,7 @@
+from sketch import Sketch
+from streamlib.wrappers import inherit_docs
 
-class MG:
+class MG(Sketch):
     """
     Misra-Gries Algorithm for Frequency-Estimation.
     
@@ -33,8 +35,14 @@ class MG:
         else:
             self.A = {_k : (_v - 1) for _k, _v in self.A.items() if _v > 1}
 
-    def frequency(self, _item):
+    def getEstimation(self, _item):
         """ Return the estimation of the frequncy of _item """
         return self.A[_item] if _item in self.A.keys() else 0
-        
+    
+    def frequency(self, _item):
+        """ Return the estimation of the frequncy of _item """
+        return self.getEstimation(_item)
 
+    def merge(self, skc):
+        """ MG sketch is not mergable """
+        raise AttributeError(" MG sketch is not mergable ")
