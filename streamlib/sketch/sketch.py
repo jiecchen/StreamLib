@@ -3,9 +3,7 @@ from abc import ABCMeta, abstractmethod
 class BasicEstimator():
     """ Interface for basic sketch estimator """
     __metaclass__ = ABCMeta
-    def __init__(self, *args, **kwargs):
-        pass
-
+  
     @abstractmethod
     def process(self, *args, **kwargs):
         """ process each item """

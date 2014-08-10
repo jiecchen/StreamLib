@@ -2,7 +2,31 @@ _Default_Distribution = [0, 1]
 
 
 from bisect import bisect_left
+from abc import abstractmethod, ABCMeta
+from wrappers import inherit_docs
 import random
+
+class ABDataSrteam:
+    """ Interface for Abstract DataStream """
+    __metaclass__ = ABCMeta
+    
+    @abstractmethod
+    def next(self):
+        """ return next item in the DataStream """
+        pass
+        
+    @abstractmethod
+    def __iter__(self):
+        pass
+
+
+
+
+
+
+
+
+
 
 # TODO: + extend to continuous distribution
 #       + add more flexible constructors
@@ -50,8 +74,44 @@ class Distribution:
 #       + strict turnstile model 
 #       + cash register model
 
+class Turnstile(ABDataSrteam):
+    """ 
+    An iterator of Turrnstile model,
+    return (a_i, w_i) each time 
+    here w_i = weightFunc(a_i) and weightFunc can be a stochastic function
+    """
+    def __init__(self, distribution=None, weightFunc = 1,  size = 100):
+        # function used to construct the weight for each item
+        if weightFunc == 0:
+            self.weightFunc = lambda x: 1
+        else:
+            self.weightFunc = weightFunc
 
-class DataStream:
+        self._size = size
+        self._distribution = Distribution(distribution)
+
+    def __iter__(self):
+        return self
+
+    def next(self):
+        if self._size <= 0:
+            raise StopIteration
+        self._size -= 1
+        sp = self._distribution.getSample()
+        return (sp, self.weightFunc(sp))
+
+
+
+
+
+
+
+
+
+
+
+@inherit_docs
+class DataStream(ABDataSrteam):
     """
     The class for data stream, defined as an iterator
 
@@ -61,7 +121,7 @@ class DataStream:
     ...    print s
     
     """
-    def __init__(self, _distribution=None, _size = 100):
+    def __init__(self, distribution=None, size = 100, model = 'simple'):
         self._size = _size
         self._distribution = Distribution(_distribution)
 
