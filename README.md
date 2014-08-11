@@ -10,5 +10,5 @@ Algorithms included:
 
 ## Dependency
 Require Python 2.x (x >= 6). Modules required:
-	1. mmh3 - Python wrapper for MurmurHash
-	2. numpy
+  1. mmh3 - Python wrapper for MurmurHash
+  2. numpy
