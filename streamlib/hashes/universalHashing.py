@@ -116,6 +116,19 @@ class _matrixHash(_hash):
             value = (value << 1) | tmp
         return value
 
+import mmh3
+class _murmurHash(_hash):
+    """ Hash class constructed by MurmurHash """
+    def __init__(self, _M, _random):
+        self.seed = _random.randint(0, 1 << 31)
+        self.M = _M
+        if self.M < 1:
+            raise ValueError('M should be larger than 0!')
+    
+    def hash(self, key):
+        key = -(key + 1) if key < 0 else key
+        return mmh3.hash(key.__str__(), self.seed) % self.M
+
 
 # there is an issue, given M, the return hash value 
 # might never reach M - 1  due to the gap between M and its
@@ -137,13 +150,18 @@ class UniversalHash:
         self._random.seed()
         self._M = _M
 
-    def pickHash(self):
+    def pickHash(self, mode = 'murmur'):  # mode from {'matrix', 'murmur'}
         """ 
         Randomly return a hash function belongs to 
         this Universal Hash Family. Such hash function is
         an instance of _LinearHash hence has the method .hash(hashable_object)
         """
-        return _matrixHash(self._M, self._random)
+        if mode == 'matrix':
+            return _matrixHash(self._M, self._random)
+        elif mode == 'murmur':
+            return _murmurHash(self._M, self._random)
+        else:
+            return None
 
             
             
