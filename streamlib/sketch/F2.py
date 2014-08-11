@@ -1,0 +1,32 @@
+from Sketch import Sketch, BasicEstimator
+from streamlib.wrappers import inherit_docs
+from streamlib.hashes.universalHashing import UniversalHash
+from streamlib.utils import median
+
+@inherit_docs
+class _F2_estimator(BasicEstimator):
+    """  Basic estimator for 2-frequencey moment """
+    
+    def __init__(self, uhash):
+        self.h = uhash.pickHash()
+        self.x = 0
+
+    def process(self, itm):
+        try:
+            i, c = itm
+        except (ValueError, TypeError):
+            i = itm
+            c = 1
+        self.x += c * (1 - 2 * self.h(i))
+
+    def getEstimation(self):
+        return self.x ** 2
+
+    def merge(self, skc):
+        self.x += skc.x
+
+
+@inherit_docs
+class F2(Sketch):
+    def __init__(self, eps, delta = 0.001):
+        pass
