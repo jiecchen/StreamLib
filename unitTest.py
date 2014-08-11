@@ -99,5 +99,27 @@ class Test_CountSketch(unittest.TestCase):
             self.assertTrue(abs(hs.getEstimation(elem) - ct[elem]) <= 0.1 * (tot - ct[elem]))
 
 
+from streamlib.sketch.F2 import F2, _F2_estimator
+class Test_F2(unittest.TestCase):
+    def setUp(self):
+        dist = {'a':1, 'b':10, 'c': 100}
+        self.d = DataStream(dist, 500)
+        self.dist = dist
+
+    def test_F2_Estimator(self):
+        uhash = UniversalHash(2)
+        f2_est = _F2_estimator(uhash)
+        f2_est.batchProcess(self.d)
+        
+    
+    def test_getEstimation(self):
+        f2 = F2(0.3, 0.01)
+        f2.batchProcess(self.d)
+        est = f2.getEstimation()
+        sm = sum(self.dist.values())
+        truef2 = sum([ (x * 500. / sm)**2 for x in self.dist.values()])
+        self.assertTrue( abs(truef2 - est) <= 0.3 * truef2 )
+
+
 if __name__ == '__main__':
     unittest.main()
