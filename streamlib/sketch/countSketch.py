@@ -21,11 +21,18 @@ class _CountSketch_estimator(BasicEstimator):
         self.g = uhash_g.pickHash()
     
     def process(self, key):
-        self.C[self.h.hash(key)] +=  1 - 2 * self.g.hash(key)
+        # key has the form (i, c) or i
+        try:
+            i, c = key
+        except (ValueError, TypeError):
+            i = key
+            c = 1
+
+        self.C[self.h.hash(i)] +=  c * (1 - 2 * self.g.hash(i))
         
 
-    def getEstimation(self, key):
-        return (1 - 2 * self.g.hash(key)) * self.C[self.h.hash(key)]
+    def getEstimation(self, i):
+        return (1 - 2 * self.g.hash(i)) * self.C[self.h.hash(i)]
     
 
     def merge(self, skc):
@@ -55,9 +62,9 @@ class CountSketch(Sketch):
             est.process(key)
 
 
-    def getEstimation(self, key):
+    def getEstimation(self, i):
         """ return the (eps, delta)-approximation """
-        return median( [est.getEstimation(key) for est in self.estimators] )
+        return median( [est.getEstimation(i) for est in self.estimators] )
 
 
     def merge(self, skc):
