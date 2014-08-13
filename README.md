@@ -7,7 +7,7 @@ A Python library for streaming algorithms - Implemented in pure python
 Algorithms included:
 
    * Sketch
-      * Count Sketch [cmkm][]
+      * Count Sketch [cmkm]()
 	  * Count Min Sketch [cm05][]
 	  * BJKST Sketch [bjkst][]
 	  * Misra-Gries Sketch [mg82][]
