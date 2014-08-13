@@ -126,10 +126,10 @@ class Test_Quantile(unittest.TestCase):
         pass
         
     def test_getEstimation(self):
-        q = Quantile(0.001, 0, 10)
-        d = DataStream({1:1, 2:1, 3:1, 4:1}, 10000)
-        q.batchProcess(d)
-        print q.getEstimation(10)
+        q = Quantile(0.001, 0, 100.)
+        # d = DataStream({1:1, 2:1, 3:1, 4:1}, 10000)
+        q.batchProcess([1, 2, 3, 4, 1, 1, 100, 2, 5, 8])
+        # print q.getEstimation(4)
             
 
 if __name__ == '__main__':
