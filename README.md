@@ -7,12 +7,12 @@ A Python library for streaming algorithms - Implemented in pure python
 Algorithms included:
 
    * Sketch
-      * Count Sketch [cmkm]()
-	  * Count Min Sketch [cm05][]
-	  * BJKST Sketch [bjkst][]
-	  * Misra-Gries Sketch [mg82][]
-	  * F2 Sketch [ams][]
-	  * Quantile Sketch [myblog][]
+      * Count Sketch [ccfc04]
+	  * Count Min Sketch [cm05]
+	  * BJKST Sketch [bjkst]
+	  * Misra-Gries Sketch [mg82]
+	  * F2 Sketch [ams]
+	  * Quantile Sketch [myblog]
    * Hash
 	  * Strong Universal Hash Family ( provide k-wise independent hash functions )
 
@@ -99,7 +99,7 @@ print f2.getEstimation()
 
 
 ## References
-[cmkm]: Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
+[ccfc04]: Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
 
 [ams]: Alon, Noga, Yossi Matias, and Mario Szegedy. "The space complexity of approximating the frequency moments." Proceedings of the twenty-eighth annual ACM symposium on Theory of computing. ACM, 1996.
 
