@@ -7,12 +7,12 @@ A Python library for streaming algorithms - Implemented in pure python
 Algorithms included:
 
    * Sketch
-      * Count Sketch [1][ccfc04]
-	  * Count Min Sketch [2][cm05]
-	  * BJKST Sketch [3][bjkst]
-	  * Misra-Gries Sketch [4][mg82]
-	  * F2 Sketch [5][ams]
-	  * Quantile Sketch [6][myblog]
+      * Count Sketch [^ccfc04]
+	  * Count Min Sketch [^cm05]
+	  * BJKST Sketch [^bjkst]
+	  * Misra-Gries Sketch [^mg82]
+	  * F2 Sketch [^ams]
+	  * Quantile Sketch [^myblog]
    * Hash
 	  * Strong Universal Hash Family ( provide k-wise independent hash functions )
 
@@ -99,17 +99,17 @@ print f2.getEstimation()
 
 
 ## References
-[ccfc04]: Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
+[^ccfc04]: Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
 
-[ams]: Alon, Noga, Yossi Matias, and Mario Szegedy. "The space complexity of approximating the frequency moments." Proceedings of the twenty-eighth annual ACM symposium on Theory of computing. ACM, 1996.
+[^ams]: Alon, Noga, Yossi Matias, and Mario Szegedy. "The space complexity of approximating the frequency moments." Proceedings of the twenty-eighth annual ACM symposium on Theory of computing. ACM, 1996.
 
-[bjskt]: Bar-Yossef, Ziv, et al. "Counting distinct elements in a data stream." Randomization and Approximation Techniques in Computer Science. Springer Berlin Heidelberg, 2002. 1-10.
+[^bjskt]: Bar-Yossef, Ziv, et al. "Counting distinct elements in a data stream." Randomization and Approximation Techniques in Computer Science. Springer Berlin Heidelberg, 2002. 1-10.
 
-[cm05]: Cormode, Graham, and S. Muthukrishnan. "An improved data stream summary: the count-min sketch and its applications." Journal of Algorithms 55.1 (2005): 58-75.
+[^cm05]: Cormode, Graham, and S. Muthukrishnan. "An improved data stream summary: the count-min sketch and its applications." Journal of Algorithms 55.1 (2005): 58-75.
 
-[mg82]: Misra, Jayadev, and David Gries. "Finding repeated elements." Science of computer programming 2.2 (1982): 143-152.
+[^mg82]: Misra, Jayadev, and David Gries. "Finding repeated elements." Science of computer programming 2.2 (1982): 143-152.
 
-[myblog]: http://jiecchen.github.io
+[^myblog]: http://jiecchen.github.io
 ## Contributors
 
   * jiecchen `chenjiecao@gmail.com`
