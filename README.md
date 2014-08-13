@@ -7,12 +7,12 @@ A Python library for streaming algorithms - Implemented in pure python
 Algorithms included:
 
    * Sketch
-      * Count Sketch [ccfc04]
-	  * Count Min Sketch [cm05]
-	  * BJKST Sketch [bjkst]
-	  * Misra-Gries Sketch [mg82]
-	  * F2 Sketch [ams]
-	  * Quantile Sketch [myblog]
+      * Count Sketch [1][ccfc04]
+	  * Count Min Sketch [2][cm05]
+	  * BJKST Sketch [3][bjkst]
+	  * Misra-Gries Sketch [4][mg82]
+	  * F2 Sketch [5][ams]
+	  * Quantile Sketch [6][myblog]
    * Hash
 	  * Strong Universal Hash Family ( provide k-wise independent hash functions )
 
