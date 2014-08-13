@@ -7,7 +7,7 @@ A Python library for streaming algorithms - Implemented in pure python
 Algorithms included:
 
    * Sketch
-      * Count Sketch [^1]
+      * Count Sketch [1]
 	  * Count Min Sketch [^cm05]
 	  * BJKST Sketch [^bjkst]
 	  * Misra-Gries Sketch [^mg82]
@@ -99,7 +99,7 @@ print f2.getEstimation()
 
 
 ## References
-[^1]: Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
+[1]: Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
 
 [^ams]: Alon, Noga, Yossi Matias, and Mario Szegedy. "The space complexity of approximating the frequency moments." Proceedings of the twenty-eighth annual ACM symposium on Theory of computing. ACM, 1996.
 
