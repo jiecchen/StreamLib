@@ -7,12 +7,12 @@ A Python library for streaming algorithms - Implemented in pure python
 Algorithms included:
 
    * Sketch
-      * Count Sketch 
-	  * Count Min Sketch
-	  * BJKST Sketch
-	  * Misra-Gries Sketch
-	  * F2 Sketch 
-	  * Quantile Sketch
+      * Count Sketch [ccfc04]
+	  * Count Min Sketch [cm05]
+	  * BJKST Sketch [bjkst]
+	  * Misra-Gries Sketch [mg82]
+	  * F2 Sketch [ams]
+	  * Quantile Sketch [myblog]
    * Hash
 	  * Strong Universal Hash Family ( provide k-wise independent hash functions )
 
@@ -28,7 +28,7 @@ can process/manipulate. There are two pre-defined models:
 	 special case of turnsitle model, each item has the form `(i, 1)`, or equivalently, `i`.
 	 In other words, each item has the same weight.
 
-By add some extra restrictions to turnsitle model, one can also get some other models, e.g. **Cash Register model**, **Strict Turnsitle model**, users are responsible for the restrictions they added.
+By adding some extra restrictions to turnsitle model, one can also get some other models, e.g. **Cash Register model**, **Strict Turnsitle model**, users are responsible for the restrictions they added.
 	 
 For our library, if a streaming algorithm is able work under turnsitle model, it will automatically work under vanilla model.
 
@@ -62,7 +62,7 @@ Each sketch implemented in our library inherits abstract class *Sketch*. Followi
 ~~~python
 	@abstractmethod
 	def process(self, *args, **kwargs):
-        """ process each item """
+	""" process each item """
 
     def batchProcess(self, dataStream):
         """ process the dataStream in batch """
@@ -75,7 +75,7 @@ Each sketch implemented in our library inherits abstract class *Sketch*. Followi
     def merge(self, sketch):
 		""" merge self & sketch if mergable """
 ~~~
-Take F2 Sketch (which give the estimation of second frequency moment of a data stream)
+Take F2 Sketch (which gives the estimation of second frequency moment of a data stream)
 as an example:
 
 
@@ -99,8 +99,12 @@ print f2.getEstimation()
 
 
 ## References
-
-
+[ccfc04]: Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
+[ams]: Alon, Noga, Yossi Matias, and Mario Szegedy. "The space complexity of approximating the frequency moments." Proceedings of the twenty-eighth annual ACM symposium on Theory of computing. ACM, 1996.
+[bjskt]: Bar-Yossef, Ziv, et al. "Counting distinct elements in a data stream." Randomization and Approximation Techniques in Computer Science. Springer Berlin Heidelberg, 2002. 1-10.
+[cm05]: Cormode, Graham, and S. Muthukrishnan. "An improved data stream summary: the count-min sketch and its applications." Journal of Algorithms 55.1 (2005): 58-75.
+[mg82]: Misra, Jayadev, and David Gries. "Finding repeated elements." Science of computer programming 2.2 (1982): 143-152.
+[myblog]: jiecchen.github.io
 ## Contributors
 
   * jiecchen `chenjiecao@gmail.com`
