@@ -1,3 +1,5 @@
+# Algorithm Designed by myself
+
 from sketch import Sketch
 from bisect import bisect_left, bisect_right
 
@@ -6,6 +8,19 @@ class Quantile(Sketch):
     """
     Deterministic single pass approximate algorithm for quantile problem
     in streaming model. Mergable sketch.
+    
+    Usage:
+    q = Quantile(eps, a, b) requires all items appeares in the data stream is in [a, b]
+    q.getEstimation(k) then return an (1 + eps)-approximation to the k_th smallest item
+    in the data stream.
+    Example:
+    --------------
+    >>> q = Quantile(0.001, 0, 100.0)
+    >>> d = [1, 2, 3, 4, 1, 1, 100, 2, 5, 8]
+    >>> q.batchProcess(d)
+    >>> print q.getEstimation(4) 
+    2.00251528703
+    -------------
     """
     # when all items \in [a, b + n]
     # Space usage: O(log n / eps) to give (1 + eps) - approximation
@@ -20,6 +35,7 @@ class Quantile(Sketch):
         self.a = []
         self.C = []
         self.n = 0
+        b = a + 2 * (b - a)
         while t <= b:
             self.a.append(t)
             self.C.append(0)
