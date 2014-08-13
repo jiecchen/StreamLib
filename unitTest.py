@@ -120,6 +120,17 @@ class Test_F2(unittest.TestCase):
         truef2 = sum([ (x * 500. / sm)**2 for x in self.dist.values()])
         self.assertTrue( abs(truef2 - est) <= 0.3 * truef2 )
 
+from streamlib.sketch.quantile import Quantile
+class Test_Quantile(unittest.TestCase):
+    def setUp(self):
+        pass
+        
+    def test_getEstimation(self):
+        q = Quantile(0.001, 0, 10)
+        d = DataStream({1:1, 2:1, 3:1, 4:1}, 10000)
+        q.batchProcess(d)
+        print q.getEstimation(10)
+            
 
 if __name__ == '__main__':
     unittest.main()
