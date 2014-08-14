@@ -109,7 +109,8 @@ print f2.getEstimation()
 
 [mg82]: Misra, Jayadev, and David Gries. "Finding repeated elements." Science of computer programming 2.2 (1982): 143-152.
 
-[myblog]: http://jiecchen.github.io
+[myblog]: http://jiecchen.github.io/blog/2014/08/13/quantile-sketch/
+
 ## Contributors
 
   * jiecchen `chenjiecao@gmail.com`
