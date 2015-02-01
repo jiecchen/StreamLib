@@ -98,6 +98,12 @@ print f2.getEstimation()
   * mmh3 >= 2.0
 
 
+## TODO
+- Need to redesign and generalize the interface, any *iteratable*, *hashable* object should be considered as "data stream".
+- Try to use CPython to speed up the implementation.
+- Add more streaming algorithms.
+- Minimize dependencies.
+
 ## References
 [ccfc04]: Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
 
