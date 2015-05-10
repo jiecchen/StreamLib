@@ -120,3 +120,4 @@ print f2.getEstimation()
 ## Contributors
 
   * jiecchen `chenjiecao@gmail.com`
+  * Rachel Lowden `ralowden@imail.iu.edu`
