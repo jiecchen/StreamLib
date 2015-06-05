@@ -24,7 +24,6 @@ Any **iterable** object with **hashable** elements can be considered as a data s
 
 ~~~python
 import random
-
 def demoGen(N = 1000):
     i = 0
     while i < N:
