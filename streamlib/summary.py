@@ -4,6 +4,55 @@
 from streamlib import MurmurHash
 import copy
 from array import array
+from abc import ABCMeta, abstractmethod
+from random import randint
+
+
+
+
+
+class CountSketch:
+    """
+    Count Sketch.
+    """
+    def __init__(self, w=20, mu=5, typecode='i'):
+        """
+        Create a new instance for CountSketch.
+
+        :param w: The number of buckets.
+        :type w: int
+
+        :param mu: The number of repeated copies. Used to control the
+                   failure probability ~= 2^{-mu}
+        :type mu: int
+
+        :param typecode: type to represent the frequencies, check
+                         docs.python.org for module `array`
+
+        """
+        self._w = w
+        self._mu = mu
+        self._sketch = [array(typecode, [0] * w) for i in xrange(mu)]
+        self._hashes = [MurmurHash() for i in xrange(mu)]
+        self._hash = hash(self) 
+
+
+    def processBatch(self, dataStream, weighted=False):
+        pass
+
+    def processItem(self, item, weighted=False):
+        pass
+
+    def estimate(self, key):
+        pass
+
+    def merge(self, other):
+        pass
+    
+    def __add__(self, other):
+        return self.merge(other)
+
+
 
 class CountMin:
     """
@@ -38,20 +87,24 @@ class CountMin:
         :param weighted: if weighted, each item in dataStream should
                          be (key, weight) pair, where weight > 0
         """
-        if weighted:
-            for key, weight in dataStream:
-                for i in xrange(self._mu):
-                    # where the item is mapped by the i_th hash
-                    pos = self._hashes[i].hash(key) % self._w
-                    # increment the bucket
-                    self._sketch[i][pos] += weight            
-        else:
-            for item in dataStream:
-                for i in xrange(self._mu):
-                    # where the item is mapped by the i_th hash
-                    pos = self._hashes[i].hash(item) % self._w
-                    # increment the bucket
-                    self._sketch[i][pos] += 1
+
+        for item in dataStream:
+            self.processItem(item, weighted)
+
+        # if weighted:
+        #     for key, weight in dataStream:
+        #         for i in xrange(self._mu):
+        #             # where the item is mapped by the i_th hash
+        #             pos = self._hashes[i].hash(key) % self._w
+        #             # increment the bucket
+        #             self._sketch[i][pos] += weight            
+        # else:
+        #     for item in dataStream:
+        #         for i in xrange(self._mu):
+        #             # where the item is mapped by the i_th hash
+        #             pos = self._hashes[i].hash(item) % self._w
+        #             # increment the bucket
+        #             self._sketch[i][pos] += 1
 
     def processItem(self, item, weighted=False):
         """
@@ -64,31 +117,30 @@ class CountMin:
                          be a (key, weight) pair, where weight > 0
         """
         if weighted:
-            for key, weight in dataStream:
-                for i in xrange(self._mu):
-                    # where the item is mapped by the i_th hash
-                    pos = self._hashes[i].hash(key) % self._w
-                    # increment the bucket
-                    self._sketch[i][pos] += weight            
+            key, weight = item
+            for i in xrange(self._mu):
+                # where the item is mapped by the i_th hash
+                pos = self._hashes[i].hash(key) % self._w
+                # increment the bucket
+                self._sketch[i][pos] += weight            
         else:
-            for item in dataStream:
-                for i in xrange(self._mu):
-                    # where the item is mapped by the i_th hash
-                    pos = self._hashes[i].hash(item) % self._w
-                    # increment the bucket
-                    self._sketch[i][pos] += 1
+            for i in xrange(self._mu):
+                # where the item is mapped by the i_th hash
+                pos = self._hashes[i].hash(item) % self._w
+                # increment the bucket
+                self._sketch[i][pos] += 1
 
 
-    def estimate(self, item):
+    def estimate(self, key):
         """
         Estimate the frequency of given item.
 
-        :param item: same type as elements in dataStream
+        :param key: key/item in the data stream
         
-        :return: estimated frequency of the given item.
+        :return: estimated frequency of the given key.
         :rtype: int/real
         """
-        all_estimators = [self._sketch[i][self._hashes[i].hash(item) % self._w]
+        all_estimators = [self._sketch[i][self._hashes[i].hash(key) % self._w]
                           for i in xrange(self._mu)]
         return min(all_estimators)
 
