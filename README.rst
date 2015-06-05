@@ -1,4 +1,3 @@
-:tocdepth: 3
 ==========
 StreamLib 
 ==========
@@ -22,8 +21,6 @@ Algorithms included:
   + Quantile Sketch [myblog]_
   + ...
 
-.. math::
-   \sum_i x_i
 
 
 Data Stream
@@ -96,7 +93,7 @@ TODO
 * Add more streaming algorithms.
 * Minimize dependencies.
 
-References
+Bibliography
 -------------
 .. [ccfc04] Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
 
