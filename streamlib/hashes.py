@@ -1,3 +1,7 @@
+"""
+Interface and implementation for hash functions.
+"""
+
 from abc import ABCMeta, abstractmethod
 import mmh3
 import random
@@ -9,10 +13,12 @@ class _Hash:
     @abstractmethod
     def hash(self, key):
         """
-        @args
-        key : a hashable object
-        @return 
-        an integer as hashed value, \in [0, M)
+        Map the given key to an integer.
+
+        :param key: a hashable object
+        
+        :return:
+        :rtype: int
         """
         raise NotImplementedError('To be overwritten!')
 
