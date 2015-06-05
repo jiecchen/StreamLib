@@ -7,7 +7,7 @@ StreamLib
 
 Document can be found in http://streamlib.readthedocs.org/ .
 
-Description
+Overview
 -------------
 Algorithms included:
 
@@ -21,9 +21,11 @@ Algorithms included:
   + Quantile Sketch [myblog]_
   + ...
 
-Usage
----------
-DataStream
+
+
+Data Stream
+------------
+
 Any **iterable** object with **hashable** elements can be considered as a data stream. Here are some examples.
 
 * a list of integers: `[1, 10, 20, 1, 5]`
@@ -44,6 +46,7 @@ Any **iterable** object with **hashable** elements can be considered as a data s
 * a tuple of strings: `('fix', 'the', 'bug', please', '...')`
 * a string: `'abcdefgdahfahdfajkhfkahfsahfjksfhjk'`
 * many more
+
 
 Summarize the data stream
 -------------------------
@@ -74,11 +77,11 @@ result of above code,::
 An instance of `CountMin` can be initialized by two parameters, see docs for detail.
 
 
-Document
+Documents
 ---------
 `Official Document <http://streamlib.readthedocs.org/>`_.
 
-Dependency
+Dependencies
 ------------------
 * Python = 2.x (x >= 6).
 * mmh3 >= 2.0
