@@ -33,7 +33,7 @@ def demoGen(N = 1000):
 dataStream = demoGen()
 ~~~
 + a tuple of strings: `('fix', 'the', 'bug', please', '...')`
-+ a string: 'abcdefgdahfahdfajkhfkahfsahfjksfhjk'
++ a string: `'abcdefgdahfahdfajkhfkahfsahfjksfhjk'`
 + many more
 
 ## Summarize the data stream
