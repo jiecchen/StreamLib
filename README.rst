@@ -28,7 +28,7 @@ Data Stream
 
 Any **iterable** object with **hashable** elements can be considered as a data stream. Here are some examples.
 
-* a list of integers: :python:`[1, 10, 20, 1, 5]`
+* a list of integers: :code:`[1, 10, 20, 1, 5]`
 * a generator that yields tuples, see the instance `dataStream` as follows,
 
 .. code-block:: python
@@ -43,8 +43,8 @@ Any **iterable** object with **hashable** elements can be considered as a data s
 
    dataStream = demoGen()
 
-* a tuple of strings: :python:`('fix', 'the', 'bug', please', '...')`
-* a string: :python:`'abcdefgdahfahdfajkhfkahfsahfjksfhjk'`
+* a tuple of strings: :code:`('fix', 'the', 'bug', please', '...')`
+* a string: :code:`'abcdefgdahfahdfajkhfkahfsahfjksfhjk'`
 * many more
 
 
