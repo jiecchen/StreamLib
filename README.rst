@@ -2,8 +2,9 @@
 ==========
 StreamLib 
 ==========
-**python library for streaming algorithms**
-
+-------------------------------------------
+python library for streaming algorithms
+-------------------------------------------
 
 Document can be found in http://streamlib.readthedocs.org/ .
 
@@ -21,6 +22,8 @@ Algorithms included:
   + Quantile Sketch [myblog]_
   + ...
 
+.. math::
+   \sum_i x_i
 
 
 Data Stream
