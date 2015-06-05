@@ -109,7 +109,7 @@ References
 
 Contributors
 ---------------
-* jiecchen `chenjiecao@gmail.com`
-* Rachel Lowden `ralowden@imail.iu.edu`
+* `jiecchen <chenjiecao@gmail.com>`_
+* `Rachel Lowden <ralowden@imail.iu.edu>`_
 
 
