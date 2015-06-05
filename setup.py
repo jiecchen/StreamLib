@@ -53,7 +53,7 @@ setup(
         "Operating System :: OS Independent"
     ],
 
-    long_description=read('README.md'),
+    long_description=read('README.rst'),
     install_requires=['mmh3'],
 #    cmdclass = {'test': PyTest},
 )
