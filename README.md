@@ -45,17 +45,20 @@ in the module **streamlib**. We give some examples to show their basic usage.
 Count-Min sketch[CM05] is used to summarize the data stream and estimate the frequency of each element in the data stream. This sketch give high accurate estimation to heavy hitters (elements that have high frequencies) while relatively large error may induced for light elements. See following example for the basic usage.
 
 ~~~python
->>> from streamlib import CountMin
->>> cm = CountMin()
->>> cm.processBatch([0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4])
->>> for i in xrange(5):
->>>    print 'Estimated frequency of', i, 'is', cm.estimate(i)
-Estimated frequency of 0 is 4
-Estimated frequency of 1 is 6
-Estimated frequency of 2 is 1
-Estimated frequency of 3 is 2
-Estimated frequency of 4 is 1
+from streamlib import CountMin
+cm = CountMin() # create a instance of CountMin, see docs for more detail
+cm.processBatch([0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4])
+for i in xrange(5):
+    print 'Estimated frequency of', i, 'is', cm.estimate(i)
 ~~~
+result of above code,
+
+	Estimated frequency of 0 is 4
+	Estimated frequency of 1 is 6
+	Estimated frequency of 2 is 1
+	Estimated frequency of 3 is 2
+	Estimated frequency of 4 is 1
+
 
 An instance of `CountMin` can be initialized by two parameters, see docs for detail.
 
