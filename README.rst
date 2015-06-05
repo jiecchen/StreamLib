@@ -1,7 +1,8 @@
 :tocdepth: 3
-StreamLib: *python library for streaming algorithms*
 ==========
-
+StreamLib 
+==========
+**python library for streaming algorithms**
 
 Document can be found in http://streamlib.readthedocs.org/ .
 
