@@ -4,30 +4,32 @@ StreamLib
 
 A Python library for streaming algorithms
 
-Document can be found in [http://streamlib.readthedocs.org/](http://streamlib.readthedocs.org/).
+Document can be found in `http://streamlib.readthedocs.org/<http://streamlib.readthedocs.org/>`_.
 
 Description
 -------------
 Algorithms included:
 
-   * Sketch
-	  * Count Min Sketch [cm05] -- DONE
-	  * Count Sketch [ccfc04]
-	  * BJKST Sketch [bjkst]
-	  * Misra-Gries Sketch [mg82]
-	  * F2 Sketch [ams]
-	  * Quantile Sketch [myblog]
-	  * ...
+* Sketch
+  * Count Min Sketch [cm05] -- DONE
+  * Count Sketch [ccfc04]
+  * BJKST Sketch [bjkst]
+  * Misra-Gries Sketch [mg82]
+  * F2 Sketch [ams]
+  * Quantile Sketch [myblog]
+  * ...
 
 Usage
 ---------
 DataStream
 Any **iterable** object with **hashable** elements can be considered as a data stream. Here are some examples.
 
-+ a list of integers: `[1, 10, 20, 1, 5]`
-+ a generator that yields tuples, see the instance `dataStream` as follows,
+* a list of integers: `[1, 10, 20, 1, 5]`
+* a generator that yields tuples, see the instance `dataStream` as follows,
 
 .. code-block:: python
+   :linenos
+
    import random
    def demoGen(N = 1000):
        i = 0
@@ -37,9 +39,9 @@ Any **iterable** object with **hashable** elements can be considered as a data s
 
    dataStream = demoGen()
 
-+ a tuple of strings: `('fix', 'the', 'bug', please', '...')`
-+ a string: `'abcdefgdahfahdfajkhfkahfsahfjksfhjk'`
-+ many more
+* a tuple of strings: `('fix', 'the', 'bug', please', '...')`
+* a string: `'abcdefgdahfahdfajkhfkahfsahfjksfhjk'`
+* many more
 
 Summarize the data stream
 -------------------------
@@ -51,6 +53,8 @@ Count-Min Sketch
 Count-Min sketch[CM05] is used to summarize the data stream and estimate the frequency of each element in the data stream. This sketch give high accurate estimation to heavy hitters (elements that have high frequencies) while relatively large error may induced for light elements. See following example for the basic usage.
 
 .. code-block:: python
+   :linenos
+
    from streamlib import CountMin
    cm = CountMin() # create a instance of CountMin, see document for more detail
    cm.processBatch([0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4])
@@ -70,8 +74,8 @@ An instance of `CountMin` can be initialized by two parameters, see docs for det
 
 Dependency
 ------------------
-  * Python = 2.x (x >= 6).
-  * mmh3 >= 2.0
+* Python = 2.x (x >= 6).
+* mmh3 >= 2.0
 
 
 TODO
@@ -96,5 +100,5 @@ References
 
 Contributors
 ---------------
-  * jiecchen `chenjiecao@gmail.com`
-  * Rachel Lowden `ralowden@imail.iu.edu`
+* jiecchen `chenjiecao@gmail.com`
+* Rachel Lowden `ralowden@imail.iu.edu`
