@@ -20,76 +20,44 @@ Algorithms included:
 Any **iterable** object with **hashable** elements can be considered as a data stream. Here are some examples.
 
 + a list of integers: `[1, 10, 20, 1, 5]`
-+ a generator that yields tuples, see the instance `demo` as follows,
++ a generator that yields tuples, see the instance `dataStream` as follows,
 
 ~~~python
+import random
+
 def demoGen(N = 1000):
     i = 0
     while i < N:
         yield random.randint(0, 10);
         i += 1
-demo = demoGen()
 
+dataStream = demoGen()
+~~~
++ a tuple of strings: `('fix', 'the', 'bug', please', '...')`
++ a string: 'abcdefgdahfahdfajkhfkahfsahfjksfhjk'
++ many more
 
+## Summarize the data stream
+Many algorithms that are popular to summarize data streams are included
+in the module **streamlib**. We give some examples to show their basic usage.
 
+### Count-Min Sketch
+Count-Min sketch[CM05] is used to summarize the data stream and estimate the frequency of each element in the data stream. This sketch give high accurate estimation to heavy hitters (elements that have high frequencies) while relatively large error may induced for light elements. See following example for the basic usage.
 
 ~~~python
-from streamlib.stream import DataStream
-#############################################################
-# use dict to represents discrete distribution
-# each key appears with probability in proportion to its value
-dist = {'A': 10,  'B': 1, 'C': 100}
-d = DataStream(dist, 1000) # the second para is total number of items d will yield
-# now we can print the items in d:
-for itm in d:
-	print itm
-
-############################################################
-# to generate elements from a list uniformly
-ls = list('qwertyuiopasdfghjklzxcvbnm')
-d = DataStream(ls, 10000)
-
-############################################################
-# create instance from file
-d = DataStream('file_name')
-~~~
-For more details, please check the document.
-
-### Sketch
-Each sketch implemented in our library inherits abstract class *Sketch*. Following are the common methods they share:
-
-~~~python
-	@abstractmethod
-	def process(self, *args, **kwargs):
-	""" process each item """
-
-    def batchProcess(self, dataStream):
-        """ process the dataStream in batch """
-
-    @abstractmethod
-    def getEstimation(self, *args, **kwargs):
-        """ return the estimation """
-    
-    @abstractmethod
-    def merge(self, sketch):
-		""" merge self & sketch if mergable """
-~~~
-Take F2 Sketch (which gives the estimation of second frequency moment of a data stream)
-as an example:
-
-
-~~~python
-from streamlib.stream import DataStream
-from streamlib.sketch import F2
-d = DataStream({'A':1, 'B':2, 'C':10}, 100)
-# construct the F2 sketch
-f2 = F2(0.1, 0.001) # F2(eps, delta) returns an (eps, delta) estimator
-for x in d:   # or simply write as `f2.batchProcess(d)`
-	f2.process(x)
-# print the estimation	
-print f2.getEstimation()
+>>> from streamlib import CountMin
+>>> cm = CountMin()
+>>> cm.processBatch([0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4])
+>>> for i in xrange(5):
+>>>    print 'Estimated frequency of', i, 'is', cm.estimate(i)
+Estimated frequency of 0 is 4
+Estimated frequency of 1 is 6
+Estimated frequency of 2 is 1
+Estimated frequency of 3 is 2
+Estimated frequency of 4 is 1
 ~~~
 
+An instance of `CountMin` can be initialized by two parameters, see docs for detail.
 
 ## Dependency
 
