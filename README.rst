@@ -1,11 +1,13 @@
+:tocdepth: 3
 StreamLib
-=========
+==========
 
 A Python library for streaming algorithms
 
 Document can be found in [http://streamlib.readthedocs.org/](http://streamlib.readthedocs.org/).
 
-## Description
+Description
+-------------
 Algorithms included:
 
    * Sketch
@@ -17,41 +19,44 @@ Algorithms included:
 	  * Quantile Sketch [myblog]
 	  * ...
 
-## Usage
-### DataStream
+Usage
+---------
+DataStream
 Any **iterable** object with **hashable** elements can be considered as a data stream. Here are some examples.
 
 + a list of integers: `[1, 10, 20, 1, 5]`
 + a generator that yields tuples, see the instance `dataStream` as follows,
 
-~~~python
-import random
-def demoGen(N = 1000):
-    i = 0
-    while i < N:
-        yield random.randint(0, 10);
-        i += 1
+.. code-block:: python
+   import random
+   def demoGen(N = 1000):
+       i = 0
+       while i < N:
+           yield random.randint(0, 10);
+           i += 1
 
-dataStream = demoGen()
-~~~
+   dataStream = demoGen()
+
 + a tuple of strings: `('fix', 'the', 'bug', please', '...')`
 + a string: `'abcdefgdahfahdfajkhfkahfsahfjksfhjk'`
 + many more
 
-## Summarize the data stream
+Summarize the data stream
+-------------------------
 Many algorithms that are popular to summarize data streams are included
 in the module **streamlib**. We give some examples to show their basic usage.
 
-### Count-Min Sketch
+Count-Min Sketch
+#################
 Count-Min sketch[CM05] is used to summarize the data stream and estimate the frequency of each element in the data stream. This sketch give high accurate estimation to heavy hitters (elements that have high frequencies) while relatively large error may induced for light elements. See following example for the basic usage.
 
-~~~python
-from streamlib import CountMin
-cm = CountMin() # create a instance of CountMin, see document for more detail
-cm.processBatch([0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4])
-for i in xrange(5):
-    print 'Estimated frequency of', i, 'is', cm.estimate(i)
-~~~
+.. code-block:: python
+   from streamlib import CountMin
+   cm = CountMin() # create a instance of CountMin, see document for more detail
+   cm.processBatch([0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4])
+   for i in xrange(5):
+       print 'Estimated frequency of', i, 'is', cm.estimate(i)
+
 result of above code,
 
 	Estimated frequency of 0 is 4
@@ -63,19 +68,20 @@ result of above code,
 
 An instance of `CountMin` can be initialized by two parameters, see docs for detail.
 
-## Dependency
-
+Dependency
+------------------
   * Python = 2.x (x >= 6).
   * mmh3 >= 2.0
 
 
-## TODO
-- Need to redesign and generalize the interface, any *iteratable*, *hashable* object should be considered as "data stream".
-- Try to use CPython to speed up the implementation.
-- Add more streaming algorithms.
-- Minimize dependencies.
+TODO
+---------------
+* Try to use CPython to speed up the implementation.
+* Add more streaming algorithms.
+* Minimize dependencies.
 
-## References
+References
+-------------
 [ccfc04]: Charikar, Moses, Kevin Chen, and Martin Farach-Colton. "Finding frequent items in data streams." Automata, Languages and Programming. Springer Berlin Heidelberg, 2002. 693-703.
 
 [ams]: Alon, Noga, Yossi Matias, and Mario Szegedy. "The space complexity of approximating the frequency moments." Proceedings of the twenty-eighth annual ACM symposium on Theory of computing. ACM, 1996.
@@ -88,7 +94,7 @@ An instance of `CountMin` can be initialized by two parameters, see docs for det
 
 [myblog]: http://jiecchen.github.io/blog/2014/08/13/quantile-sketch/
 
-## Contributors
-
+Contributors
+---------------
   * jiecchen `chenjiecao@gmail.com`
   * Rachel Lowden `ralowden@imail.iu.edu`
