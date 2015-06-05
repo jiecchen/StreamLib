@@ -11,6 +11,7 @@ Description
 Algorithms included:
 
 * Sketch
+
   + Count Min Sketch [cm05] -- DONE
   + Count Sketch [ccfc04]
   + BJKST Sketch [bjkst]
