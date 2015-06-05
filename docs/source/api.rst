@@ -8,3 +8,13 @@ API Documentation
     :special-members:
     :exclude-members: __dict__, __weakref__
     :member-order: bysource
+
+
+``streamlib.hashes``
+----------------------
+
+.. autoclass:: streamlib.hashes.MurmurHash
+    :members:
+    :special-members:
+    :exclude-members: __dict__, __weakref__
+    :member-order: bysource
