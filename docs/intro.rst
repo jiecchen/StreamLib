@@ -1,4 +1,0 @@
-Introduction
-============
-
-.. autoclass:: stream.DataStream
