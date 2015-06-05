@@ -42,5 +42,8 @@ setup(
     ],
 
     long_description=read('README.md'),
+    install_requires=[
+        'mmh3',
+    ],
 )
 
