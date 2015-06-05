@@ -4,7 +4,6 @@ StreamLib
 ==========
 **python library for streaming algorithms**
 
-|Build Status| |Coverage| |Version|
 
 Document can be found in http://streamlib.readthedocs.org/ .
 
