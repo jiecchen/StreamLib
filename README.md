@@ -1,38 +1,37 @@
 StreamLib
 =========
 
-A Python library for streaming algorithms - Implemented in pure python
+A Python library for streaming algorithms
 
 ## Description
 Algorithms included:
 
    * Sketch
-      * Count Sketch [ccfc04]
-	  * Count Min Sketch [cm05]
+	  * Count Min Sketch [cm05] -- DONE
+	  * Count Sketch [ccfc04]
 	  * BJKST Sketch [bjkst]
 	  * Misra-Gries Sketch [mg82]
 	  * F2 Sketch [ams]
 	  * Quantile Sketch [myblog]
-   * Hash
-	  * Strong Universal Hash Family ( provide k-wise independent hash functions )
+	  * ...
 
 ## Usage
 ### DataStream
-The class `DataStream` defined in `streamlib.stream` is the object that our algorithms
-can process/manipulate. There are two pre-defined models:
+Any **iterable** object with **hashable** elements can be considered as a data stream. Here are some examples.
 
-   * turnsitle model :
-	 each item is in the form `(i, c)`, where `i` is the element
-	 and `c` is the weight.
-   * vanilla model :
-	 special case of turnsitle model, each item has the form `(i, 1)`, or equivalently, `i`.
-	 In other words, each item has the same weight.
++ a list of integers: `[1, 10, 20, 1, 5]`
++ a generator that yields tuples, see the instance `demo` as follows,
 
-By adding some extra restrictions to turnsitle model, one can also get some other models, e.g. **Cash Register model**, **Strict Turnsitle model**, users are responsible for the restrictions they added.
-	 
-For our library, if a streaming algorithm is able work under turnsitle model, it will automatically work under vanilla model.
+~~~python
+def demoGen(N = 1000):
+    i = 0
+    while i < N:
+        yield random.randint(0, 10);
+        i += 1
+demo = demoGen()
 
-An instance of DataStream can be constructed use the following ways:
+
+
 
 ~~~python
 from streamlib.stream import DataStream
