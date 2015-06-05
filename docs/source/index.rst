@@ -7,7 +7,7 @@ Welcome to StreamLib's documentation!
 =====================================
 
 User's Guide
------
+-------------------
 
 .. toctree::
    :maxdepth: 2
@@ -18,10 +18,10 @@ User's Guide
 
 
 API Reference
-----
+--------------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    
    api
 
