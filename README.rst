@@ -12,12 +12,12 @@ Algorithms included:
 
 * Sketch
 
-  + Count Min Sketch [cm05] -- DONE
-  + Count Sketch [ccfc04]
-  + BJKST Sketch [bjkst]
-  + Misra-Gries Sketch [mg82]
-  + F2 Sketch [ams]
-  + Quantile Sketch [myblog]
+  + Count Min Sketch [cm05]_ -- DONE
+  + Count Sketch [ccfc04]_
+  + BJKST Sketch [bjkst]_
+  + Misra-Gries Sketch [mg82]_
+  + F2 Sketch [ams]_
+  + Quantile Sketch [myblog]_
   + ...
 
 Usage
@@ -28,9 +28,9 @@ Any **iterable** object with **hashable** elements can be considered as a data s
 * a list of integers: `[1, 10, 20, 1, 5]`
 * a generator that yields tuples, see the instance `dataStream` as follows,
 
-::
-
+.. code-block:: python
    import random
+
    def demoGen(N = 1000):
        i = 0
        while i < N:
@@ -50,13 +50,15 @@ in the module **streamlib**. We give some examples to show their basic usage.
 
 Count-Min Sketch
 #################
-Count-Min sketch[CM05] is used to summarize the data stream and estimate the frequency of each element in the data stream. This sketch give high accurate estimation to heavy hitters (elements that have high frequencies) while relatively large error may induced for light elements. See following example for the basic usage.
-::
-   from streamlib import CountMin
-   cm = CountMin() # create a instance of CountMin, see document for more detail
-   cm.processBatch([0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4])
-   for i in xrange(5):
-       print 'Estimated frequency of', i, 'is', cm.estimate(i)
+Count-Min sketch [cm05]_ is used to summarize the data stream and estimate the frequency of each element in the data stream. This sketch give high accurate estimation to heavy hitters (elements that have high frequencies) while relatively large error may induced for light elements. See following example for the basic usage.
+
+.. code-block:: python
+
+    from streamlib import CountMin
+    cm = CountMin() # create a instance of CountMin, see document for more detail
+    cm.processBatch([0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4])
+    for i in xrange(5):
+	print 'Estimated frequency of', i, 'is', cm.estimate(i)
 
 result of above code,::
 
@@ -68,6 +70,11 @@ result of above code,::
 
 
 An instance of `CountMin` can be initialized by two parameters, see docs for detail.
+
+
+Document
+---------
+`Official Document <http://streamlib.readthedocs.org/>`_.
 
 Dependency
 ------------------
