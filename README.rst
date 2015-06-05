@@ -2,7 +2,7 @@
 StreamLib
 ==========
 
-A Python library for streaming algorithms
+***A Python library for streaming algorithms***
 
 Document can be found in http://streamlib.readthedocs.org/ .
 
