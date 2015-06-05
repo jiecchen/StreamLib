@@ -1,7 +1,7 @@
 """
 
 """
-from hashes import MurmurHash
+from streamlib import MurmurHash
 
 class CountMin:
     """
