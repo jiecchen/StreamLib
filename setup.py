@@ -1,46 +1,46 @@
-#!/usr/bin/env python
-
+# coding=utf-8
+from setuptools import setup, find_packages
+from codecs import open
 import os
-import sys
 
-import streamlib
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+def read(fname):
+    path = os.path.join(os.path.dirname(__file__), fname)
+    return open(path, encoding='utf-8').read()
 
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
-    sys.exit()
 
-short = 'A python library for streaming algorithms'
 setup(
-    name = 'streamlib',
-    version = fn.__version__,
-    description = short,
-    long_description = open('README.md').read() + '\n\n' + open('CHANGES.txt').read(),
-    author='Jiecchen',
-    author_email='chenjiecao@gmail.com',
-    url='https://github.com/jiecchen/StreamLib'
-    packages=['streamlib', 'streamlib.sketch', 'streamlib.hashes'],
-    package_data={'': ['LICENSE.txt', 'README.md', 'CHANGES.txt']},
-    include_package_data=True,
-    install_requires=[
-        "mmh3 >= 2.0"
+    name="streamlib",
+    version="1.0.1",
+    packages=find_packages(),
+
+    # development metadata
+    zip_safe=True,
+
+    # metadata for upload to PyPI
+    author="Jiecao Chen",
+    author_email="chenjiecao@gmail.com",
+    description="TinyDB is a tiny, document oriented database optimized for "
+                "your happiness :)",
+    license="MIT",
+    keywords="streaming algorithms",
+    url="https://github.com/jiecchen/StreamLib",
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Researchers",
+        "Intended Audience :: Data Scientists",
+        "License :: OSI Approved :: MIT License",
+        "Topic :: Algorithms",
+        "Topic :: Algorithms :: Streaming Algorithms",
+        "Topic :: Utilities",
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
+#        "Programming Language :: Python :: 3.3",
+#        "Programming Language :: Python :: 3.4",
+#        "Programming Language :: Python :: Implementation :: PyPy",
+        "Operating System :: OS Independent"
     ],
-    license=open('LICENSE.txt').read(),
-    zip_safe=False,
-    classifiers=(
-        'Development Status :: 2 - Pre-Alpha',
-        'Intended Audience :: Developers',
-        'Natural Language :: English',
-       # 'License :: OSI Approved :: Apache Software License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
-       # 'Programming Language :: Python :: 3',
-       # 'Programming Language :: Python :: 3.1',
-       # 'Programming Language :: Python :: 3.2',
-       # 'Programming Language :: Python :: 3.3',
-    ),
+
+    long_description=read('README.md'),
 )
+
