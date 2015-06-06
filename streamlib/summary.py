@@ -6,12 +6,12 @@ import copy
 from array import array
 from abc import ABCMeta, abstractmethod
 from random import randint
+from streamlib.utils import doc_inherit
+import streamlib.utils as utils
 
 
 
-
-
-class CountSketch:
+class CountSketch(object):
     """
     Count Sketch.
     """
@@ -38,10 +38,42 @@ class CountSketch:
 
 
     def processBatch(self, dataStream, weighted=False):
-        pass
+        """
+        Summarize the given data stream.
+
+        :param dataStream: any iterable object with hashable elements. 
+                           e.g. a list of integers.
+        :param weighted: if weighted, each item in dataStream should
+                         be (key, weight) pair
+        """
+
+        for item in dataStream:
+            self.processItem(item, weighted)
 
     def processItem(self, item, weighted=False):
-        pass
+        """
+        Summarize the given data stream, but only process one
+        item.
+
+        :param item: hashable object to be processed
+                           e.g. an integer
+        :param weighted: if weighted, item  should
+                         be a (key, weight) pair
+        """
+        if weighted:
+            key, weight = item
+            for i in xrange(self._mu):
+                # where the item is mapped by the i_th hash
+                pos = self._hashes[i].hash(key) % self._w
+                # increment the bucket
+                self._sketch[i][pos] += weight * (randint(-1, 0) * 2 + 1)
+        else:
+            for i in xrange(self._mu):
+                # where the item is mapped by the i_th hash
+                pos = self._hashes[i].hash(item) % self._w
+                # increment the bucket
+                self._sketch[i][pos] += (randint(-1, 0) * 2 + 1)
+
 
     def estimate(self, key):
         pass
@@ -54,9 +86,10 @@ class CountSketch:
 
 
 
-class CountMin:
+class CountMin(object):
     """
     Count-Min sketch.
+    support non-negative weighted data stream.
     """
     def __init__(self, w=20, mu=5, typecode='i'):
         """
@@ -90,21 +123,6 @@ class CountMin:
 
         for item in dataStream:
             self.processItem(item, weighted)
-
-        # if weighted:
-        #     for key, weight in dataStream:
-        #         for i in xrange(self._mu):
-        #             # where the item is mapped by the i_th hash
-        #             pos = self._hashes[i].hash(key) % self._w
-        #             # increment the bucket
-        #             self._sketch[i][pos] += weight            
-        # else:
-        #     for item in dataStream:
-        #         for i in xrange(self._mu):
-        #             # where the item is mapped by the i_th hash
-        #             pos = self._hashes[i].hash(item) % self._w
-        #             # increment the bucket
-        #             self._sketch[i][pos] += 1
 
     def processItem(self, item, weighted=False):
         """
@@ -196,4 +214,65 @@ class CountMin:
         Overload + for self.merge
         """
         return self.merge(other)
+
+
+
+class CountMedian(CountMin):
+    """
+    Count-Median sketch.
+    support negative weighted data stream.
+    """
+
+    @doc_inherit
+    def __init__(self, w=20, mu=5, typecode='i'):
+        super(CountMedian, self).__init__(w, mu, typecode)
+
+
+    
+    def processBatch(self, dataStream, weighted=False):
+        """
+        Summarize the given data stream.
+
+        :param dataStream: any iterable object with hashable elements. 
+                           e.g. a list of integers.
+        :param weighted: if weighted, each item in dataStream should
+                         be (key, weight) pair, weight can be positive
+                         or negtive
+        """
+
+        for item in dataStream:
+            self.processItem(item, weighted)
+
+
+    def processItem(self, item, weighted=False):
+        """
+        Summarize the given data stream, but only process one
+        item.
+
+        :param item: hashable object to be processed
+                           e.g. an integer
+        :param weighted: if weighted, item  should
+                         be a (key, weight) pair, weight can be postive
+                         or negative
+        """
+        super(CountMedian, self).processItem(item, weighted)
+
+
+    def estimate(self, key):
+        """
+        Estimate the frequency of given item.
+
+        :param key: key/item in the data stream
+        
+        :return: estimated frequency of the given key.
+        :rtype: int/real
+        """
+        all_estimators = [self._sketch[i][self._hashes[i].hash(key) % self._w]
+                          for i in xrange(self._mu)]
+        return utils.median(all_estimators)
+
+
+            
+        
+
 
