@@ -11,6 +11,56 @@ import streamlib.utils as utils
 
 
 
+
+
+
+
+class Sketch(object):
+    """
+    Interface for Sketch.
+    """
+    @abstractmethod
+    def processBatch(self, *args, **kwargs):
+        """
+        Summarize data stream in batch mode.
+        """
+        raise NotImplemented()
+
+    @abstractmethod
+    def processItem(self, *args, **kwargs):
+        """
+        Summarize one item in a data stream.
+        """
+        raise NotImplemented()
+
+    @abstractmethod
+    def estimate(self, *args, **kwargs):
+        """
+        Estimate properties of given item/key.
+        """
+        raise NotImplemented()
+
+    @abstractmethod
+    def merge(self, *args, **kwargs):
+        """
+        Merge compatible sketches.
+        """
+        raise NotImplemented()
+
+    @abstractmethod
+    def __add__(self, other):
+        return self.merge(other)
+
+
+
+
+
+
+
+
+
+
+
 class CountSketch(object):
     """
     Count Sketch.
@@ -86,7 +136,7 @@ class CountSketch(object):
 
 
 
-class CountMin(object):
+class CountMin(Sketch):
     """
     Count-Min sketch.
     support non-negative weighted data stream.
