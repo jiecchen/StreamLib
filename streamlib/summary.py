@@ -67,7 +67,7 @@ class CountSketch(object):
     """
     def __init__(self, w=20, mu=5, typecode='i'):
         """
-        Create a new instance for CountSketch.
+        Create a new instance.
 
         :param w: The number of buckets.
         :type w: int
@@ -143,7 +143,7 @@ class CountMin(Sketch):
     """
     def __init__(self, w=20, mu=5, typecode='i'):
         """
-        Create a new instance of CountMin.
+        Create a new instance.
 
         :param w: The number of buckets.
         :type w: int
