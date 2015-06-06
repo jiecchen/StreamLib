@@ -22,6 +22,46 @@ Algorithms included:
   + Quantile Sketch [myblog]_
   + ...
 
+Above algorithms share several common features, we could therefore specify a bunch of
+common methods, here are some.
+
+.. code-block:: python
+
+class Sketch(object):
+    """
+    Interface for Sketch.
+    """
+    @abstractmethod
+    def processBatch(self, *args, **kwargs):
+        """
+        Summarize data stream in batch mode.
+        """
+        raise NotImplemented()
+
+    @abstractmethod
+    def processItem(self, *args, **kwargs):
+        """
+        Summarize one item in a data stream.
+        """
+        raise NotImplemented()
+
+    @abstractmethod
+    def estimate(self, *args, **kwargs):
+        """
+        Estimate properties of given item/key.
+        """
+        raise NotImplemented()
+
+    @abstractmethod
+    def merge(self, *args, **kwargs):
+        """
+        Merge compatible sketches.
+        """
+        raise NotImplemented()
+
+    @abstractmethod
+    def __add__(self, other):
+        return self.merge(other)
 
 
 Data Stream
