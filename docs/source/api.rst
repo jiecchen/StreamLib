@@ -10,6 +10,12 @@ API Documentation
     :exclude-members: __dict__, __weakref__
     :member-order: bysource
 
+.. autoclass:: streamlib.summary.CountMedian
+    :members:
+    :special-members:
+    :exclude-members: __dict__, __weakref__
+    :member-order: bysource
+
 
 ``streamlib.hashes``
 ----------------------
