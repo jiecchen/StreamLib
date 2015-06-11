@@ -83,6 +83,7 @@ class CountSketch(object):
         self._w = w
         self._mu = mu
         self._sketch = [array(typecode, [0] * w) for i in xrange(mu)]
+        self._sign = [MurmurHash() for i in xrange(mu)]
         self._hashes = [MurmurHash() for i in xrange(mu)]
         self._hash = hash(self) 
 
@@ -116,20 +117,78 @@ class CountSketch(object):
                 # where the item is mapped by the i_th hash
                 pos = self._hashes[i].hash(key) % self._w
                 # increment the bucket
-                self._sketch[i][pos] += weight * (randint(-1, 0) * 2 + 1)
+                sg = (self._sign[i].hash(key) % 2) * 2 - 1
+                self._sketch[i][pos] += weight * sg
         else:
             for i in xrange(self._mu):
                 # where the item is mapped by the i_th hash
                 pos = self._hashes[i].hash(item) % self._w
                 # increment the bucket
-                self._sketch[i][pos] += (randint(-1, 0) * 2 + 1)
-
+                sg = (self._sign[i].hash(item) % 2) * 2 - 1
+                self._sketch[i][pos] += sg
+                
 
     def estimate(self, key):
-        pass
+        """
+        Estimate the frequency of given item.
+
+        :param key: key/item in the data stream
+        
+        :return: estimated frequency of the given key.
+        :rtype: int/real
+        """
+        all_estimators = [(self._sign[i].hash(key) % 2 * 2 - 1) * 
+                          self._sketch[i][self._hashes[i].hash(key) % self._w]
+                          for i in xrange(self._mu)]
+        return utils.median(all_estimators)
+
+
+
+    def reproduce(self, num=1):
+        """
+        Reproduce Count Sketch instance(s) to have the same
+        internal status.
+
+        :param num: number of instances to be reproduced
+        :type num: int
+
+        :return: reproduced instance. if num > 1, a list 
+                 of instances will be returned
+        """
+        if type(num) is not int:
+            raise TypeError('num should be int')
+        if num < 1:
+            raise ValueError('num should >= 1')
+
+        if num == 1:
+            return copy.deepcopy(self)
+        else:
+            return [copy.deepcopy(self)]
+
 
     def merge(self, other):
-        pass
+        """
+        Merge two CountSketch instances if they are compatible.
+
+        :param other: an instance of CountSketch, 
+        """
+        if other._hash != self._hash:
+            raise ValueError('two instances are not compatible')
+
+        res = CountSketch(w=1, mu=1)
+        res._sketch = copy.deepcopy(self._sketch)
+        res._hashes = copy.deepcopy(self._hashes)
+        res._sign = copy.deepcopy(self._sign)
+        res._w = self._w
+        res._mu = self._mu
+
+        for i in xrange(self._mu):
+            for j in xrange(self._w):
+                res._sketch[i][j] += other._sketch[i][j]
+
+        return res
+
+
     
     def __add__(self, other):
         return self.merge(other)
