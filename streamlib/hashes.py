@@ -6,7 +6,7 @@ from abc import ABCMeta, abstractmethod
 import mmh3
 import random
 
-class _Hash:
+class _Hash(object):
     """ 
     Interface for Hash Object. 
     """
