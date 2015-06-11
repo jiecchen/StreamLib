@@ -15,7 +15,7 @@ Algorithms included:
 
   + Count Min Sketch [cm05]_ -- DONE
   + Count Median Sketch [cm05]_ -- DONE
-  + Count Sketch [ccfc04]_
+  + Count Sketch [ccfc04]_ -- DONE
   + BJKST Sketch [bjkst]_
   + Misra-Gries Sketch [mg82]_
   + F2 Sketch [ams]_
