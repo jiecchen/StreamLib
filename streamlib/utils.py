@@ -8,6 +8,12 @@ def median(numbers):
     l = len(st)
     return (st[l // 2] + st[(l - 1) // 2]) / 2
 
+def mean(numbers):
+    if len(numbers) == 0:
+        return 0
+    else:
+        return sum(numbers) / len(numbers)
+
 
 
 from functools import wraps

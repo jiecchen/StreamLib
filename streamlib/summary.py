@@ -55,9 +55,75 @@ class Sketch(object):
 
 
 
+class F2(Sketch):
+    """
+    AMS F2 sketch
+    estimate the second moment of the 
+    data stream
+    """
+    def __init__(self, w=20, mu=5, typecode='i'):
+        """
+        Create a new instance.
+
+        :param w: The number of buckets.
+        :type w: int
+
+        :param mu: The number of repeated copies. Used to control the
+                   failure probability ~= 2^{-mu}
+        :type mu: int
+
+        :param typecode: type to represent the frequencies, check
+                         docs.python.org for module `array`
+    
+        """
+        
+        self._w = w
+        self._mu = mu
+        self._sketch = [array(typecode, [0] * w) for i in xrange(mu)]
+        self._hashes = [[MurmurHash() for j in xrange(w)] for i in xrange(mu)]
+        self._hash = hash(self) 
 
 
+    def processBatch(self, dataStream, weighted=False):
+        """
+        Summarize the given data stream.
 
+        :param dataStream: any iterable object with hashable elements. 
+                           e.g. a list of integers.
+        """
+
+        for item in dataStream:
+            self.processItem(item, weighted)
+
+            
+    def processItem(self, item, weighted=False):
+        """
+        Summarize the given data stream, but only process one
+        item.
+
+        :param item: hashable object to be processed
+                           e.g. an integer
+        """
+        if not weighted:
+            for i in xrange(self._mu):
+                for j in xrange(self._w):
+                    self._sketch[i][j] += self._hashes[i][j].hash(item) % 2 * 2 - 1
+        else:
+            itm, wt = item
+            for i in xrange(self._mu):
+                for j in xrange(self._w):
+                    self._sketch[i][j] += (self._hashes[i][j].hash(itm) % 2 * 2 - 1) * wt                                    
+
+    def estimate(self):
+        """
+        Estimate the F2 moment of the given stream
+        
+        :return: estimated F2 moment
+        :rtype: int/real
+        """
+
+        return utils.median([utils.mean( map(lambda x: x**2, self._sketch[i]) )
+                             for i in xrange(self._mu)])
 
 
 
