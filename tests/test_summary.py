@@ -1,5 +1,5 @@
 import pytest
-
+import math
 
 from streamlib import CountMin
 class Test_CountMin(object):
@@ -61,3 +61,21 @@ class Test_CountMedian(object):
         assert c.estimate(1) == 9
         assert c.estimate(2) == 1
         assert c.estimate(3) == 2
+
+
+from streamlib import F2
+class Test_F2(object):
+    
+    def test(self):
+        w = 300
+        f2 = F2(w)
+        items = [1, 2, 3, 4]
+        weights = [5, 1, 1, 6]
+        f2.processBatch(zip(items, weights), True)
+        new_f2 = f2.merge(f2.reproduce())
+
+        #    items.extend(items)
+        weights = map(lambda x: x * 2, weights)
+        exact_f2 = sum(map(lambda x: x**2, weights))
+
+        assert abs(new_f2.estimate() - exact_f2) <=  exact_f2 / math.sqrt(w)

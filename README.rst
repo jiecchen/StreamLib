@@ -18,7 +18,7 @@ Algorithms included:
   + Count Sketch [ccfc04]_ -- DONE
   + BJKST Sketch [bjkst]_
   + Misra-Gries Sketch [mg82]_
-  + F2 Sketch [ams]_
+  + F2 Sketch [ams]_ -- DONE
   + Quantile Sketch [myblog]_
   + ...
 

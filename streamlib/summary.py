@@ -127,6 +127,52 @@ class F2(Sketch):
 
 
 
+    def reproduce(self, num=1):
+        """
+        Reproduce F2 Sketch instance(s) to have the same
+        internal status.
+
+        :param num: number of instances to be reproduced
+        :type num: int
+
+        :return: reproduced instance. if num > 1, a list 
+                 of instances will be returned
+        """
+        if type(num) is not int:
+            raise TypeError('num should be int')
+        if num < 1:
+            raise ValueError('num should >= 1')
+
+        if num == 1:
+            return copy.deepcopy(self)
+        else:
+            return [copy.deepcopy(self)]
+
+
+    def merge(self, other):
+        """
+        Merge two F2 Sketch instances if they are compatible.
+
+        :param other: an instance of F2 Sketch, 
+        """
+        if other._hash != self._hash:
+            raise ValueError('two instances are not compatible')
+
+        res = F2(w=1, mu=1)
+        res._sketch = copy.deepcopy(self._sketch)
+        res._hashes = copy.deepcopy(self._hashes)
+        res._w = self._w
+        res._mu = self._mu
+        res._hash = self._hash
+
+        for i in xrange(self._mu):
+            for j in xrange(self._w):
+                res._sketch[i][j] += other._sketch[i][j]
+
+        return res
+
+
+
 class CountSketch(object):
     """
     Count Sketch.
@@ -247,6 +293,7 @@ class CountSketch(object):
         res._sign = copy.deepcopy(self._sign)
         res._w = self._w
         res._mu = self._mu
+        res._hash = self._hash
 
         for i in xrange(self._mu):
             for j in xrange(self._w):
