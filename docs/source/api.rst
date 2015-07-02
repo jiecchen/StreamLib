@@ -16,6 +16,21 @@ API Documentation
     :exclude-members: __dict__, __weakref__
     :member-order: bysource
 
+.. autoclass:: streamlib.summary.CountSketch
+    :members:
+    :special-members:
+    :exclude-members: __dict__, __weakref__
+    :member-order: bysource
+
+
+.. autoclass:: streamlib.summary.F2
+    :members:
+    :special-members:
+    :exclude-members: __dict__, __weakref__
+    :member-order: bysource
+
+
+
 
 ``streamlib.hashes``
 ----------------------
