@@ -102,13 +102,13 @@
 
 
 
-<div class="viewcode-block" id="F2"><a class="viewcode-back" href="../../api.html#streamlib.summary.F2">[docs]</a><span class="k">class</span> <span class="nc">F2</span><span class="p">(</span><span class="n">Sketch</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">F2</span><span class="p">(</span><span class="n">Sketch</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    AMS F2 sketch</span>
 <span class="sd">    estimate the second moment of the </span>
 <span class="sd">    data stream</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="F2.__init__"><a class="viewcode-back" href="../../api.html#streamlib.summary.F2.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">typecode</span><span class="o">=</span><span class="s">&#39;i&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">typecode</span><span class="o">=</span><span class="s">&#39;i&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a new instance.</span>
 
@@ -130,8 +130,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_hashes</span> <span class="o">=</span> <span class="p">[[</span><span class="n">MurmurHash</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">w</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">mu</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> 
 
-</div>
-<div class="viewcode-block" id="F2.processBatch"><a class="viewcode-back" href="../../api.html#streamlib.summary.F2.processBatch">[docs]</a>    <span class="k">def</span> <span class="nf">processBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataStream</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">processBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataStream</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Summarize the given data stream.</span>
 
@@ -142,8 +142,8 @@
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">dataStream</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">processItem</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">weighted</span><span class="p">)</span>
 
-            </div>
-<div class="viewcode-block" id="F2.processItem"><a class="viewcode-back" href="../../api.html#streamlib.summary.F2.processItem">[docs]</a>    <span class="k">def</span> <span class="nf">processItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+            
+    <span class="k">def</span> <span class="nf">processItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Summarize the given data stream, but only process one</span>
 <span class="sd">        item.</span>
@@ -160,8 +160,8 @@
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mu</span><span class="p">):</span>
                 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_w</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_sketch</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hashes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">hash</span><span class="p">(</span><span class="n">itm</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">wt</span>                                    
-</div>
-<div class="viewcode-block" id="F2.estimate"><a class="viewcode-back" href="../../api.html#streamlib.summary.F2.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Estimate the F2 moment of the given stream</span>
 <span class="sd">        </span>
@@ -173,8 +173,8 @@
                              <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mu</span><span class="p">)])</span>
 
 
-</div>
-<div class="viewcode-block" id="F2.reproduce"><a class="viewcode-back" href="../../api.html#streamlib.summary.F2.reproduce">[docs]</a>    <span class="k">def</span> <span class="nf">reproduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">reproduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reproduce F2 Sketch instance(s) to have the same</span>
 <span class="sd">        internal status.</span>
@@ -195,8 +195,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)]</span>
 
-</div>
-<div class="viewcode-block" id="F2.merge"><a class="viewcode-back" href="../../api.html#streamlib.summary.F2.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Merge two F2 Sketch instances if they are compatible.</span>
 
@@ -219,12 +219,12 @@
         <span class="k">return</span> <span class="n">res</span>
 
 
-</div></div>
-<div class="viewcode-block" id="CountSketch"><a class="viewcode-back" href="../../api.html#streamlib.summary.CountSketch">[docs]</a><span class="k">class</span> <span class="nc">CountSketch</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<span class="k">class</span> <span class="nc">CountSketch</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Count Sketch.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="CountSketch.__init__"><a class="viewcode-back" href="../../api.html#streamlib.summary.CountSketch.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">typecode</span><span class="o">=</span><span class="s">&#39;i&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">typecode</span><span class="o">=</span><span class="s">&#39;i&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a new instance.</span>
 
@@ -246,8 +246,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_hashes</span> <span class="o">=</span> <span class="p">[</span><span class="n">MurmurHash</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">mu</span><span class="p">)]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> 
 
-</div>
-<div class="viewcode-block" id="CountSketch.processBatch"><a class="viewcode-back" href="../../api.html#streamlib.summary.CountSketch.processBatch">[docs]</a>    <span class="k">def</span> <span class="nf">processBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataStream</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">processBatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataStream</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Summarize the given data stream.</span>
 
@@ -259,8 +259,8 @@
 
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">dataStream</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">processItem</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">weighted</span><span class="p">)</span>
-</div>
-<div class="viewcode-block" id="CountSketch.processItem"><a class="viewcode-back" href="../../api.html#streamlib.summary.CountSketch.processItem">[docs]</a>    <span class="k">def</span> <span class="nf">processItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">processItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Summarize the given data stream, but only process one</span>
 <span class="sd">        item.</span>
@@ -286,8 +286,8 @@
                 <span class="n">sg</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sign</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">hash</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_sketch</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">pos</span><span class="p">]</span> <span class="o">+=</span> <span class="n">sg</span>
                 
-</div>
-<div class="viewcode-block" id="CountSketch.estimate"><a class="viewcode-back" href="../../api.html#streamlib.summary.CountSketch.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Estimate the frequency of given item.</span>
 
@@ -302,8 +302,8 @@
         <span class="k">return</span> <span class="n">utils</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">all_estimators</span><span class="p">)</span>
 
 
-</div>
-<div class="viewcode-block" id="CountSketch.reproduce"><a class="viewcode-back" href="../../api.html#streamlib.summary.CountSketch.reproduce">[docs]</a>    <span class="k">def</span> <span class="nf">reproduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">reproduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reproduce Count Sketch instance(s) to have the same</span>
 <span class="sd">        internal status.</span>
@@ -324,8 +324,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)]</span>
 
-</div>
-<div class="viewcode-block" id="CountSketch.merge"><a class="viewcode-back" href="../../api.html#streamlib.summary.CountSketch.merge">[docs]</a>    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Merge two CountSketch instances if they are compatible.</span>
 
@@ -349,12 +349,12 @@
         <span class="k">return</span> <span class="n">res</span>
 
 
-    </div>
+    
     <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
 
-</div>
+
 <div class="viewcode-block" id="CountMin"><a class="viewcode-back" href="../../api.html#streamlib.summary.CountMin">[docs]</a><span class="k">class</span> <span class="nc">CountMin</span><span class="p">(</span><span class="n">Sketch</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Count-Min sketch.</span>
