@@ -83,7 +83,7 @@ the following case,
     from streamlib import CountMin
     cm = CountMin()
     dataStream = [(0, 20), (1, 4), (2, 1), (3, 1), (4, 5), (1, 100), (0, 500)]
-    cm.processBatch(dataStream, weighted=True) # set **weighted=True** 
+    cm.processBatch(dataStream, weighted=True) # set weighted=True
 
     for i in xrange(5):
 	print 'Estimated frequency of', i, 'is', cm.estimate(i)
