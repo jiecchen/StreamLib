@@ -90,7 +90,7 @@ in the module <strong>streamlib</strong>. We give some examples to show their ba
     <span class="k">print</span> <span class="s">&#39;Estimated frequency of&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>result of above code,:</p>
+<p>result of above code,</p>
 <div class="highlight-python"><div class="highlight"><pre>Estimated frequency of 0 is 4
 Estimated frequency of 1 is 6
 Estimated frequency of 2 is 1
@@ -111,12 +111,31 @@ By merging those instances, we obtain a summary of the joint stream of all subst
     <span class="k">print</span> <span class="s">&#39;Estimated frequency of&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>which gives,:</p>
+<p>which gives,</p>
 <div class="highlight-python"><div class="highlight"><pre>Estimated frequency of 0 is 4
 Estimated frequency of 1 is 6
 Estimated frequency of 2 is 4
 Estimated frequency of 3 is 1
 Estimated frequency of 4 is 1
+</pre></div>
+</div>
+<p>Most sketches included in <cite>summary</cite> module can also handle <strong>weighted</strong> data stream, let&#8217;s consider
+the following case,</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">streamlib</span> <span class="kn">import</span> <span class="n">CountMin</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">CountMin</span><span class="p">()</span>
+<span class="n">dataStream</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">)]</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">processBatch</span><span class="p">(</span><span class="n">dataStream</span><span class="p">,</span> <span class="n">weighted</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="c"># set **weighted=True**</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&#39;Estimated frequency of&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s">&#39;is&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>it gives</p>
+<div class="highlight-python"><div class="highlight"><pre>Estimated frequency of 0 is 520
+Estimated frequency of 1 is 104
+Estimated frequency of 2 is 1
+Estimated frequency of 3 is 1
+Estimated frequency of 4 is 5
 </pre></div>
 </div>
 </div>
