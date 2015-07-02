@@ -79,7 +79,7 @@
 <div class="section" id="summarize-the-data-stream">
 <h2>Summarize the data stream<a class="headerlink" href="#summarize-the-data-stream" title="Permalink to this headline">¶</a></h2>
 <p>Many algorithms that are popular to summarize data streams are included
-in the module <strong>streamlib</strong>. We give some examples to show their basic usage.</p>
+in the module <strong>streamlib</strong>. We give some examples to show their basic usage. Most sketches have similar methods, e.g. <cite>processBatch</cite>, <cite>estimate</cite>, <cite>reproduce</cite>, <cite>merge</cite> etc.</p>
 <div class="section" id="count-min-sketch">
 <h3>Count-Min Sketch<a class="headerlink" href="#count-min-sketch" title="Permalink to this headline">¶</a></h3>
 <p>Count-Min sketch <a class="reference internal" href="#cm05" id="id1">[cm05]</a> is used to summarize the data stream and estimate the frequency of each element in the data stream. This sketch give high accurate estimation to heavy hitters (elements that have high frequencies) while relatively large error may induced for light elements. See following example for the basic usage.</p>
@@ -141,6 +141,21 @@ Estimated frequency of 4 is 5
 </div>
 <div class="section" id="ams-f2-sketch">
 <h3>AMS F2 Sketch<a class="headerlink" href="#ams-f2-sketch" title="Permalink to this headline">¶</a></h3>
+<p>AMS F2 Sketch can be used to estimate the second moment of the frequency vector of a data stream.
+For example, when a data stream is <cite>[1, 1, 1, 2, 2, 3]</cite>, there are three 1, two 2 and one 3, its second moment of the frequency vector then be <cite>3^2 + 2^2 + 1^2 = 14</cite>. Here we show its most basic usage.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">streamlib</span> <span class="kn">import</span> <span class="n">F2</span>
+<span class="c"># set the bucket size as w=100</span>
+<span class="c"># the |EstimatedValue - TrueValue| &lt;= TrueValue / sqrt(w)</span>
+<span class="n">f2</span> <span class="o">=</span> <span class="n">F2</span><span class="p">(</span><span class="n">w</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">dataStream</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">f2</span><span class="o">.</span><span class="n">processBatch</span><span class="p">(</span><span class="n">dataStream</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&#39;Estimated F2 =&#39;</span><span class="p">,</span> <span class="n">f2</span><span class="o">.</span><span class="n">estimate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>which gives,</p>
+<div class="highlight-python"><div class="highlight"><pre>Estimated F2 = 13
+</pre></div>
+</div>
 </div>
 </div>
 <div class="section" id="bibliography">

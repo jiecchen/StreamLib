@@ -28,7 +28,7 @@ Any **iterable** object with **hashable** elements can be considered as a data s
 Summarize the data stream
 -------------------------
 Many algorithms that are popular to summarize data streams are included
-in the module **streamlib**. We give some examples to show their basic usage.
+in the module **streamlib**. We give some examples to show their basic usage. Most sketches have similar methods, e.g. `processBatch`, `estimate`, `reproduce`, `merge` etc.
 
 Count-Min Sketch
 #################
@@ -101,10 +101,23 @@ it gives ::
 
 AMS F2 Sketch
 #############
+AMS F2 Sketch can be used to estimate the second moment of the frequency vector of a data stream.
+For example, when a data stream is `[1, 1, 1, 2, 2, 3]`, there are three 1, two 2 and one 3, its second moment of the frequency vector then be `3^2 + 2^2 + 1^2 = 14`. Here we show its most basic usage.
 
+.. code-block:: python
 
+    from streamlib import F2
+    # set the bucket size as w=100
+    # the |EstimatedValue - TrueValue| <= TrueValue / sqrt(w)
+    f2 = F2(w=100) 
+    dataStream = [1, 1, 1, 2, 2, 3]
+    f2.processBatch(dataStream)
+    print 'Estimated F2 =', f2.estimate()
 
+ 
+which gives, ::
 
+    Estimated F2 = 13
 
 
 Bibliography
