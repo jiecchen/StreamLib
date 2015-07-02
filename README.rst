@@ -5,7 +5,7 @@ StreamLib
 python library for streaming algorithms
 -------------------------------------------
 
-Document can be found in http://streamlib.readthedocs.org/ .
+Document can be found in http://xmerge.me/StreamLib/.
 
 Overview
 -------------
@@ -120,7 +120,7 @@ An instance of `CountMin` can be initialized by two parameters, see docs for det
 
 Documents
 ---------
-`Official Document <http://streamlib.readthedocs.org/>`_.
+`Official Document <http://xmerge.me/StreamLib/>`_.
 
 Dependencies
 ------------------
