@@ -63,6 +63,7 @@ By merging those instances, we obtain a summary of the joint stream of all subst
 
     cm0.processBatch([0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 3, 3, 4])
     cm1.processBatch([1, 2, 3, 4])
+    cm = cm0.merge(cm1)
     for i in xrange(5):
 	print 'Estimated frequency of', i, 'is', cm.estimate(i)
 
