@@ -1,0 +1,51 @@
+#include "CountMin.h"
+#include <vector>
+#include "Hash.h"
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
+#include <functional>
+
+CountMin_Basic::CountMin_Basic(int _m, int _d):
+  m(_m), d(_d) {
+  srand(time(NULL));
+  for (int i = 0; i < d; ++i) {
+    d_buf.push_back(Buffer(m));
+    seeds.push_back(rand());
+  }
+}
+
+
+
+void CountMin_Basic::processItem(ItemType item, double weight) {
+  for (int i = 0; i < d; ++i) {
+    int p = murmurhash(item, seeds[i]) % m;
+    d_buf[i][p] += weight;
+  }
+}
+
+double CountMin_Basic::estTotWeight(ItemType item) {
+  double values[d];
+  for (int i = 0; i < d; ++i) {
+    int p = murmurhash(item, seeds[i]) % m;
+    values[i] = d_buf[i][p];
+  }
+  return *std::min_element(values, values + d);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
