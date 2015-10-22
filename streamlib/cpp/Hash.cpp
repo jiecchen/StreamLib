@@ -10,8 +10,8 @@
 #include "Hash.h"
 
 uint32_t
-murmurhash (ItemType _key, uint32_t seed, uint32_t len) {
-  char *key = (char *) &_key;
+murmurhash (const ItemType *_key, uint32_t seed, uint32_t len) {
+  const char *key = (const char *) _key;
   uint32_t c1 = 0xcc9e2d51;
   uint32_t c2 = 0x1b873593;
   uint32_t r1 = 15;
