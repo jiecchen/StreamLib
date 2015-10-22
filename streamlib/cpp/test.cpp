@@ -4,8 +4,8 @@
 
 
 void test_CountMin() {
-  CountMin_Basic cm(100, 10);
-  std::vector<int> data = {1,1,1,0,0,0,1,1,2, 1,2,3,4,5,5,5,5,5,5,5,5,5,5};
+  CountMin cm(100, 10);
+  std::vector<int> data = {1,1,1,0,0,0,1,1,2,1,2,3,4,5,5,5,5,5,5,5,5,5,5};
   for (auto item: data) 
     cm.processItem(item);
   

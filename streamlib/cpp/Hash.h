@@ -23,7 +23,7 @@ extern "C" {
  * using the MurmurHash3 algorithm
  */
 
-uint32_t murmurhash (ItemType key, uint32_t seed, uint32_t len=4);
+uint32_t murmurhash (const ItemType *key, uint32_t seed, uint32_t len=sizeof(ItemType));
 
 #ifdef __cplusplus
 }

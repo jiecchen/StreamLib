@@ -5,7 +5,7 @@
 
 class Sketch {
 public:
-  virtual void processItem(ItemType item, double weight) = 0;
+  virtual void processItem(const ItemType &item, double weight) = 0;
 };
 
 #endif

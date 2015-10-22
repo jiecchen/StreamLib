@@ -8,17 +8,16 @@ typedef std::vector<ItemType> Buffer;
 
 
 
-/* CountMin_Basic only processes integer stream */
-class CountMin_Basic: public Sketch {
+class CountMin: public Sketch {
 private:
   int m; // size of each buffer
   int d; // # of copies of buffer
   std::vector<Buffer> d_buf;
   std::vector<int> seeds;
 public:
-  CountMin_Basic(int _m, int _d=20);
-  void processItem(ItemType item, double weight=1);
-  double estTotWeight(ItemType item);
+  CountMin(int _m, int _d=20);
+  void processItem(const ItemType &item, double weight=1);
+  double estTotWeight(const ItemType &item);
 };
 
 

@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <functional>
 
-CountMin_Basic::CountMin_Basic(int _m, int _d):
+CountMin::CountMin(int _m, int _d):
   m(_m), d(_d) {
   srand(time(NULL));
   for (int i = 0; i < d; ++i) {
@@ -17,17 +17,17 @@ CountMin_Basic::CountMin_Basic(int _m, int _d):
 
 
 
-void CountMin_Basic::processItem(ItemType item, double weight) {
+void CountMin::processItem(const ItemType &item, double weight) {
   for (int i = 0; i < d; ++i) {
-    int p = murmurhash(item, seeds[i]) % m;
+    int p = murmurhash(&item, seeds[i]) % m;
     d_buf[i][p] += weight;
   }
 }
 
-double CountMin_Basic::estTotWeight(ItemType item) {
+double CountMin::estTotWeight(const ItemType &item) {
   double values[d];
   for (int i = 0; i < d; ++i) {
-    int p = murmurhash(item, seeds[i]) % m;
+    int p = murmurhash(&item, seeds[i]) % m;
     values[i] = d_buf[i][p];
   }
   return *std::min_element(values, values + d);
