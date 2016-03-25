@@ -1,30 +1,13 @@
 """
 Interface and implementation for hash functions.
 """
-
-from abc import ABCMeta, abstractmethod
 import mmh3
 import random
 
-class _Hash(object):
-    """ 
-    Interface for Hash Object. 
-    """
-    @abstractmethod
-    def hash(self, key):
-        """
-        Map the given key to an integer.
 
-        :param key: a hashable object
-        
-        :return:
-        :rtype: int
-        """
-        raise NotImplementedError('To be overwritten!')
-
-class MurmurHash(_Hash):
+class MurmurHash:
     """
-    Murmur Hash Function.
+    Wrapper for mmh3
     """
     def __init__(self):
         self._seed = random.randint(0, 1 << 31)
@@ -33,11 +16,11 @@ class MurmurHash(_Hash):
         """
         Return the hash value of key.
 
-        :param key: can be any hashable object
+        :param key: int
         
         :return:
         :rtype: int 
         """
-        v = mmh3.hash(str(key.__hash__()), self._seed)
+        v = mmh3.hash(str(key), self._seed)
         return -(v + 1) if v < 0 else v
 
