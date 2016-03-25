@@ -2,7 +2,7 @@ Principles of Design
 ==================
 
 ## Levels of Implementation
-+ Use Cython or C/C++ to implement the low-level streaming algorithm, which only works for data stream with each item being integer.
++ Use Cython to implement the low-level streaming algorithm, which only works for data stream with each item being integer.
 + Any **iterable**, **hashable** object can be considered as a data stream. Each item can be converted to integer using proper hash function on the fly, then feed into the low-level api.
 
 
