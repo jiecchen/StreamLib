@@ -150,7 +150,7 @@ Bibliography
 
 Contributors
 ---------------
-* `jiecchen <chenjiecao@gmail.com>`_
+* `jiecchen <chenjiecao@gmail.com>`_ (owner, supported by NSF CCF-1525024)
 * `Rachel Lowden <ralowden@imail.iu.edu>`_
 
 
