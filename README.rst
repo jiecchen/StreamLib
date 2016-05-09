@@ -151,14 +151,11 @@ Bibliography
 
 Maintainer
 -----------
-* `jiecchen <chenjiecao@gmail.com>`_ 
+* `Jiecao Chen <chenjiecao@gmail.com>`_ (currently supported by NSF Grant CCF-1525024)
 
 Other contributors
 ---------------
 * `Qin Zhang <qzhangcs@indiana.edu>`_
 * `Rachel Lowden <ralowden@imail.iu.edu>`_
 
-Acknowledgement
------------
-This project is supported by NSF Grant CCF-1525024
 
