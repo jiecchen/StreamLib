@@ -148,9 +148,17 @@ Bibliography
 
 .. [myblog] http://jiecchen.github.io/blog/2014/08/13/quantile-sketch/
 
-Contributors
+
+Maintainer
+-----------
+* `jiecchen <chenjiecao@gmail.com>`_ 
+
+Other contributors
 ---------------
-* `jiecchen <chenjiecao@gmail.com>`_ (owner, supported by NSF CCF-1525024)
+* `Qin Zhang <qzhangcs@indiana.edu>`_
 * `Rachel Lowden <ralowden@imail.iu.edu>`_
 
+Acknowledgement
+-----------
+This project is supported by NSF Grant CCF-1525024
 
