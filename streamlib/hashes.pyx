@@ -9,10 +9,12 @@ cdef class MurmurHash:
     """
     Wrapper for mmh3
     """
+    cdef int _seed
     def __init__(self):
-        self._seed = random.randint(0, 1 << 31)
+        _seed = random.randint(0, 1 << 31)
+        self._seed = _seed
     
-    cdef int hash(self, int key):
+    cpdef int hash(self, int key):
         """
         Return the hash value of key.
 
