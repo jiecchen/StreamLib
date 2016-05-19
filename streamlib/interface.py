@@ -41,7 +41,6 @@ class MergeableSketch(Sketch):
         :return this
         """
 
-    @abstractmethod
     def __add__(self, other_sketch):
         """
         this + other_sketch results a merge sketch
